@@ -62,7 +62,7 @@ router.post("/api/signup", async (req, res) => {
   });
 });
 
-router.post("/api/email-activate", (req, res) => {
+router.post("/authentication/activate/", (req, res) => {
   const { token } = req.body;
   if (token) {
     jwt.verify(
