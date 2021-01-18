@@ -1,14 +1,7 @@
 const path = require("path");
-const { ConnectionTimedOutError } = require("sequelize");
 const db = require("../models");
 const router = require("express").Router();
 
-// When log in display a table of most recent work outs
-// give user ability to user to find all workout they have saved
-// ability to delete workouts from there saved workouts
-// ability to update personal workouts
-// ability to search work outs based on category
-// ability to create work outs
 
 //read for homepage
 router.get("/api/read/:id",function(req,res){
