@@ -1,3 +1,4 @@
+require("dotenv").config();
 // Requiring necessary npm packages
 const express = require("express");
 const session = require("express-session");
@@ -26,7 +27,7 @@ const htmlRoutes = require("./routes/htmlRoutes");
 app.use(authRoutes, htmlRoutes);
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
