@@ -3,15 +3,9 @@ require("dotenv").config();
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
-const jwt = require("jsonwebtoken");
-const mailgun = require("mailgun-js");
-const DOMAIN = process.env.DOMAIN;
-
-//auth user emali before making an account
-const mg = mailgun({
-  apiKey: process.env.MAILGUN_API_KEY,
-  domain: DOMAIN
-});
+const JWT = require("../config/jwt.js");
+const Mail = require("../config/mail.js");
+const private = require("../config/options.js")("private");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -28,68 +22,78 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 // otherwise send back an error
 router.post("/api/signup", async (req, res) => {
+  const { email, password, height, weight } = req.body;
   const dbUser = await db.User.findAll({
     where: {
-      email: req.body.email
+      email: email
     }
   });
 
-  if (dbUser) {
+  if (dbUser.length >= 1) {
     res.status(400).json("User with email already exists.");
   }
-  const token = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "5min"
+
+  const Jwt = new JWT();
+  const token = await Jwt.sign({ email: email }, private, "10min").catch(
+    err => {
+      console.error(err);
+    }
+  );
+
+  await db.User.create({
+    email: email,
+    password: password,
+    height: height,
+    weight: weight
+    // emailBoolean: req.body.emailBoolean
+  }).catch(err => {
+    res.status(401).json(err);
   });
 
-  const data = {
-    from: "noreply@workingoutbuddies",
-    to: req.body.email,
-    subject: "Account Activation Link",
-    text:
-      "<h2>please click on link to activate your account</h2><p>http://localhost:/8080/authentication/activate/" +
-      token +
-      "</p><p>expires in five minutes</p>"
-  };
-  mg.messages().send(data, error => {
-    if (error) {
-      return res.json({
-        error: err.message
-      });
-    }
+  const mail = new Mail();
+
+  console.log();
+  if (mail.sendMail(email, token)) {
     return res.json({
-      message: "Email has been sent, kindly activate your account"
+      message:
+        "We created your account an Email has been sent, kindly activate your account"
     });
+  }
+  return res.json({
+    error: "error"
   });
 });
 
-router.post("/authentication/activate/", (req, res) => {
-  const { token } = req.body;
+router.get("/activate/:token", async (req, res) => {
+  const { token } = req.params.token;
   if (token) {
-    jwt.verify(
-      token,
-      process.env.ACCESS_TOKEN_SECRET,
-      async (err, decodedToken) => {
-        if (err) {
-          return res.status(400).res.json({
-            error: "Incorrect or Expired Link"
-          });
-        }
-        const { email, password, height, weight } = decodedToken;
+    const Jwt = new JWT();
+    const decodedToken = await Jwt.verify(token, private).catch(err => {
+      console.error(err);
+    });
+    if (decodedToken === false) {
+      return res.status(400).res.json({
+        error: "Incorrect or Expired Link"
+      });
+    }
+    const { email } = decodedToken;
 
-        await db.User.create({
-          email: email,
-          password: password,
-          height: height,
-          weight: weight
-          // emailBoolean: req.body.emailBoolean
-        }).catch(err => {
-          res.status(401).json(err);
-        });
-
-        res.redirect(307, "/api/login");
-      }
-    );
+    await db.User.update(
+      {
+        emailBoolean: true
+      },
+      { where: { email: email } }
+    ).catch(err => {
+      res.status(401).json(err);
+    });
+    res.redirect(307, "/api/login");
   }
+  return res
+    .status(400)
+    .res.json({
+      error: "Incorrect or Expired Link"
+    })
+    .res.redirect("/login");
 });
 
 // Route for logging user out
