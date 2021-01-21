@@ -64,38 +64,6 @@ router.post("/api/signup", async (req, res) => {
   });
 });
 
-router.get("/activate/:token", async (req, res) => {
-  const { token } = req.params.token;
-  if (token) {
-    const Jwt = new JWT();
-    const decodedToken = await Jwt.verify(token, private).catch(err => {
-      console.error(err);
-    });
-    if (decodedToken === false) {
-      return res.status(400).res.json({
-        error: "Incorrect or Expired Link"
-      });
-    }
-    const { email } = decodedToken;
-
-    await db.User.update(
-      {
-        emailBoolean: true
-      },
-      { where: { email: email } }
-    ).catch(err => {
-      res.status(401).json(err);
-    });
-    res.redirect(307, "/api/login");
-  }
-  return res
-    .status(400)
-    .res.json({
-      error: "Incorrect or Expired Link"
-    })
-    .res.redirect("/login");
-});
-
 // Route for logging user out
 router.get("/logout", (req, res) => {
   req.logout();

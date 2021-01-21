@@ -22,10 +22,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const authRoutes = require("./routes/authRoutes");
-const htmlRoutes = require("./routes/htmlRoutes");
-
-app.use(authRoutes, htmlRoutes);
+//routes
+app.use(require("./routes/allRoutes.js"));
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({ force: true }).then(() => {
