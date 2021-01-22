@@ -1,8 +1,11 @@
+require("dotenv").config();
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
-
+const JWT = require("../config/jwt.js");
+const Mail = require("../config/mail.js");
+const private = require("../config/options.js")("private");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -18,17 +21,47 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 // otherwise send back an error
-router.post("/api/signup", (req, res) => {
-  db.User.create({
-    email: req.body.email,
-    password: req.body.password
-  })
-    .then(() => {
-      res.redirect(307, "/api/login");
-    })
-    .catch(err => {
-      res.status(401).json(err);
+router.post("/api/signup", async (req, res) => {
+  const { email, password, height, weight } = req.body;
+  const dbUser = await db.User.findAll({
+    where: {
+      email: email
+    }
+  });
+
+  if (dbUser.length >= 1) {
+    res.status(400).json("User with email already exists.");
+  }
+
+  const Jwt = new JWT();
+  const token = await Jwt.sign({ email: email }, private, "10min").catch(
+    err => {
+      console.error(err);
+    }
+  );
+
+  await db.User.create({
+    email: email,
+    password: password,
+    height: height,
+    weight: weight
+    // emailBoolean: req.body.emailBoolean
+  }).catch(err => {
+    res.status(401).json(err);
+  });
+
+  const mail = new Mail();
+
+  console.log();
+  if (mail.sendMail(email, token)) {
+    return res.json({
+      message:
+        "We created your account an Email has been sent, kindly activate your account"
     });
+  }
+  return res.json({
+    error: "error"
+  });
 });
 
 // Route for logging user out

@@ -3,9 +3,11 @@ const express = require("express");
 const session = require("express-session");
 // Requiring passport as we've configured it
 const passport = require("./config/passport");
+//require options
+const port = require("./config/options.js")("port");
 
 // Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
+const PORT = port || 8080;
 const db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication
@@ -20,13 +22,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const authRoutes = require("./routes/authRoutes");
-const htmlRoutes = require("./routes/htmlRoutes");
-
-app.use(authRoutes, htmlRoutes);
+//routes
+app.use(require("./routes/allRoutes.js"));
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
