@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Kyte2019!",
+    "password": "cheetah4",
     "database": "workout_buddies_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
