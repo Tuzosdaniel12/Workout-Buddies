@@ -6,7 +6,7 @@ const passport = require("../config/passport");
 const JWT = require("../config/jwt.js");
 const Mail = require("../config/mail.js");
 const private = require("../config/options.js")("private");
-const calcBmi = require("bmi-calc");
+//const calcBmi = require("@infinitetoolbox/bmi-calculator");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -40,15 +40,15 @@ router.post("/api/signup", async (req, res) => {
       console.error(err);
     }
   );
-  const { value } = calcBmi(weight, height, true);
+  ///const value = calcBmi(weight, height);
   await db.User.create({
     email: email,
     password: password,
     height: height,
     weight: weight,
     age: age,
-    gender: gender,
-    bmi: value
+    gender: gender
+    //bmi: value
     // emailBoolean: req.body.emailBoolean
   }).catch(err => {
     res.status(401).json(err);
