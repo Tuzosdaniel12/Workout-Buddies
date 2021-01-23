@@ -28,7 +28,7 @@ function createWO() {
     description: description
   }).then(() => {
     console.log(res);
-    window.location.replace("/members");
+    location.replace("/members");
   });
 }
 
@@ -38,6 +38,6 @@ function updateWO(id) {
     category: category,
     description: description
   }).then(() => {
-    window.location.replace("/members");
+    location.replace("/members");
   });
 }
