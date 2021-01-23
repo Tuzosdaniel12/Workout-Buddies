@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   const BMI = sequelize.define("BMI", {
     userBmi: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         isDecimal: true
