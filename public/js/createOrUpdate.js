@@ -10,11 +10,15 @@ const description = $("#exerciseprogramTextarea1")
 const CUBtn = $("#CUBtn");
 
 CUBtn.on("click", event => {
+  console.log("test");
   event.preventDefault();
+  console.log(event.target.data("id"));
   if (event.target.data("id")) {
     updateWO(event.target.data("id"));
+  } else {
+    console.log("creating");
+    createWO();
   }
-  createWO();
 });
 
 function createWO() {
@@ -23,6 +27,7 @@ function createWO() {
     category: category,
     description: description
   }).then(() => {
+    console.log(res);
     window.location.replace("/members");
   });
 }
