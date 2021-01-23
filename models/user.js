@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("User", {
     // The email cannot be null, and must be a proper email before creation
 
+    name: {
+      type: DataTypes.STRING,
+
+      allowNull: false
+    },
+
     email: {
       type: DataTypes.STRING,
 
@@ -47,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         isNumeric: true
       }
     },
+
     age: {
       type: DataTypes.INTEGER,
 
