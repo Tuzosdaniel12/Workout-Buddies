@@ -3,4 +3,69 @@ form.login {
   margin-top: 50px;
 }
 
+<<<<<<< HEAD
+body {
+  background-image: url("https://images.unsplash.com/photo-1553969546-6f7388a7e07c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top center;
+  font-family: 'Permanent Marker', cursive;
+}
 
+.jumbo-bg {
+  background-color: rgba(173, 165, 165, 0.0);
+  color: #333333;
+  border: none;
+}
+
+.custom-flex {
+  display: flex;
+}
+
+.custom-title {
+  align-self: end;
+  justify-self: end;
+  margin-top: 5%;
+  margin-bottom: 0;
+  color: #333333;
+}
+
+.background {
+  border-radius: 10px;
+  background-color: rgba(173, 165, 165, 0.5);
+  color: #333333;
+}
+
+.logo {
+  width: 10%;
+  height: 20%;
+}
+
+.custom-mx {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (min-width: 600px) {
+  body {
+    background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  }
+  .custom-title {
+    margin-top: 12%;
+  }
+}
+
+@media (min-width: 764px) {
+  .custom-title {
+    margin-top: 4%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .custom-title {
+    margin-top: 12%;
+  }
+}
+=======
+
+>>>>>>> baaeb50740a5d270c7d7a7476ab8d08e83b2051f
