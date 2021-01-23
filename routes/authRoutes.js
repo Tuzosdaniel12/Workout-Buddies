@@ -6,7 +6,7 @@ const passport = require("../config/passport");
 const JWT = require("../config/jwt.js");
 const Mail = require("../config/mail.js");
 const private = require("../config/options.js")("private");
-const calcBmi = require("@infinitetoolbox/bmi-calculator");
+const BMI = require("../util/bmi");
 
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
@@ -24,7 +24,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 // otherwise send back an error
 router.post("/api/signup", async (req, res) => {
-  const { name, email, password, feet, inches, weight, age, gender } = req.body;
+  const { name, email, password, height, weight, age, gender } = req.body;
   console.log(req.body);
   const dbUser = await db.User.findAll({
     where: {
@@ -42,24 +42,40 @@ router.post("/api/signup", async (req, res) => {
       console.error(err);
     }
   );
-  const height = feet * 12 + inches;
-  const value = calcBmi(weight, height);
+
+  const bmiCal = new BMI();
+
+  let bmi = await bmiCal.getRequest(age, weight * 0.453592, height * 2.54);
+  bmi = Math.floor(bmi);
+
+  console.log("HIT", bmi);
   await db.User.create({
     name: name,
     email: email,
     password: password,
     height: height,
     weight: weight,
-    age: age,
-    gender: gender,
-    bmi: value
+    age: parseInt(age),
+    gender: gender
   }).catch(err => {
-    res.status(401).json(err);
+    return res.status(401).json(err);
+  });
+
+  const userId = await db.User.findAll({
+    where: {
+      email: email
+    }
+  });
+
+  await db.BMI.create({
+    bmi: bmi,
+    UserId: userId[0].dataValues.id
+  }).catch(err => {
+    return res.status(401).json(err);
   });
 
   const mail = new Mail();
 
-  console.log();
   if (mail.sendMail(email, token)) {
     return res.json({
       message:
