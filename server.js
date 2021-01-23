@@ -32,10 +32,7 @@ app.use(passport.session());
 const authRoutes = require("./routes/authRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
 
-app.use(
-  authRoutes,
-  htmlRoutes
-);
+app.use(authRoutes, htmlRoutes);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({ force: true }).then(() => {
