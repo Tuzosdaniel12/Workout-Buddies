@@ -47,6 +47,29 @@ module.exports = (sequelize, DataTypes) => {
         isNumeric: true
       }
     },
+    age: {
+      type: DataTypes.INTEGER,
+
+      allowNull: false,
+
+      validate: {
+        isNumeric: true
+      }
+    },
+    bmi: {
+      type: DataTypes.INTEGER,
+
+      allowNull: false,
+
+      validate: {
+        isNumeric: true
+      }
+    },
+    gender: {
+      type: DataTypes.STRING,
+
+      allowNull: false
+    },
     emailBoolean: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
