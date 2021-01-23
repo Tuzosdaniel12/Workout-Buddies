@@ -10,10 +10,11 @@ const description = $("#exerciseprogramTextarea1")
 const CUBtn = $("#CUBtn");
 
 CUBtn.on("click", event => {
+  event.preventDefault();
   if (event.target.data("id")) {
     updateWO(event.target.data("id"));
   }
-    createWO();
+  createWO();
 });
 
 function createWO() {
