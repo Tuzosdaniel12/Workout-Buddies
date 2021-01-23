@@ -4,6 +4,10 @@ module.exports = function(req, res, next) {
   if (req.user) {
     return next();
   }
+  if (!req.user) {
+    res.status(401);
+    res.end(info.message);
+  }
 
   // If the user isn't logged in, redirect them to the login page
   return res.redirect("/");

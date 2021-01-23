@@ -13,6 +13,9 @@ body{
 .jumbo-bg a{
     color: #333333;
 }
+.jumbo-bg a:hover{
+    text-decoration: none;
+}
 .custom-flex{
     display: flex;
 }
