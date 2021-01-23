@@ -41,6 +41,10 @@ body{
     margin-left: 0;
     margin-right: 0;
 }
+.background-white {
+  background-color: white;
+  height: 50%;
+}
 
 @media (min-width: 469px) {
 
@@ -70,3 +74,19 @@ body{
         margin-top: 12%;
     }
   }
+
+/* Stylesheet for members login */
+
+.container {
+  padding: 2rem 0rem;
+}
+
+h4 {
+  margin: 2rem 0rem 1rem;
+}
+
+.table-image {
+  td, th {
+    vertical-align: middle;
+  }
+}
