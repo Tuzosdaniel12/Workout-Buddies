@@ -15,14 +15,22 @@
 
 <div class="container"> 
     <div class="col-md-6 col-md-offset-3 background">
-        <div class="mb-3">
+        <div class="mb-3 pb-3">
         <label for="name of the workout Input1" class="form-label">Name of the Workout</label>
         <input type="name" class="form-control" id="nameOfTheWorkoutInput1" placeholder="nameoftheworkout">
         </div>
-    
+    <p></p>
         <div class="mb-3">
         <label for="cathegory Input1" class="form-label">Category</label>
-        <input type="cathegory" class="form-control" id="categoryInput1" placeholder="category">
+        {{!-- <input type="category" class="form-control" id="categoryInput1" placeholder="category"> --}}
+        <select id="categoryInput1" name="category">
+              <option value="Full-Body">Full-Body</option>
+              <option value="Upper-Body">Upper-Body</option>
+              <option value="Lower-Body">Lower-Body</option>
+              <option value="Core">Core</option>
+              <option value="Endurance">Endurance</option>
+              <option value="Flexibilty">Flexibilty</option>
+          </select>
         </div>
         
         <div class="mb-2">
@@ -32,8 +40,9 @@
     
     
         <div class="text-right">
-        <a href=""><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> {{title}}</button></a>
+        <a href=""><button class="btn btn-lg btn-primary" id="CUBtn" data-id={{id}}><span class="fa fa-list-alt"></span> {{title}}</button></a>
         </div>
   </div>
 </div>
+<script type="text/javascript" src="../public/js/createOrUpdate.js"></script>
     
