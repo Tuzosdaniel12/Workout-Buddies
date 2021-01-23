@@ -5,8 +5,13 @@
   <title>Passport Authentication</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Permanent+Marker&display=swap" rel="stylesheet">
   <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -28,21 +33,68 @@
         <p class="lead">Create Exercise Program</p>
       </div>
     </div>
-    
-    <div class="mb-3">
-      <label for="username Input1" class="form-label">Username</label>
-      <input type="name" class="form-control" id="usernameInput1" placeholder="username">
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Article Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Bootstrap 4 CDN and Starter Template</td>
+            <td>Cristina</td>
+            <td>2.846</td>
+            <td>
+              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Bootstrap Grid 4 Tutorial and Examples</td>
+            <td>Cristina</td>
+            <td>3.417</td>
+            <td>
+              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Bootstrap Flexbox Tutorial and Examples</td>
+            <td>Cristina</td>
+            <td>1.234</td>
+            <td>
+              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  
-    <div class="mb-3">
-      <label for="name of the workout Input1" class="form-label">Name of the Workout</label>
-      <input type="name" class="form-control" id="nameOfTheWorkoutInput1" placeholder="nameoftheworkout">
-    </div>
-  
-    <div class="mb-3">
-      <label for="cathegory Input1" class="form-label">Cathegory</label>
-      <input type="cathegory" class="form-control" id="cathegoryInput1" placeholder="cathegory">
-    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+   
     
     <div class="mb-2">
       <label for="exerciseprogramTextarea1" class="form-label">Exercise Program</label>
