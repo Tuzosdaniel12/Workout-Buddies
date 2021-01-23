@@ -1,11 +1,18 @@
 const db = require("../models");
 const router = require("express").Router();
-
-//create workout
+//routes by function/page controllers due query
+//create workout userID:req.user.id
 router.post("/api/workouts", (req, res) => {
-  db.workouts.create(req.body).then(results => {
-    res.json(results);
-  });
+  db.workouts
+    .create({
+      title: req.body.title,
+      category: req.body.category,
+      description: req.body.description,
+      UserId: req.user.id
+    })
+    .then(results => {
+      res.json(results);
+    });
 });
 //read for all workouts
 router.get("/api/workouts", (req, res) => {
