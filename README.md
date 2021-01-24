@@ -17,7 +17,7 @@ progress and stats to the public view. This will help create a community built o
 
 🎉 Finished Product
 
-🗣️ Credits
+🗣️ Credits/Collaborators
 
 ❓ Questions or 💬 Comments
 
@@ -28,6 +28,20 @@ progress and stats to the public view. This will help create a community built o
 # Usage
 
 # Finished Product (Demo)
+
+# Credits/Collaborators
+
+Daniel Soledad - [Tuzosdaniel12](https://github.com/Tuzosdaniel12)
+
+Tristan Bond - [tbond4](https://github.com/tbond4)
+
+Francine Babauta - [fbabauta](https://github.com/fbabauta)
+
+
+Stanislava Medigovik - [smedigo](https://github.com/smedigo)
+
+
+<br>
 
 # Questions or Comments
 
