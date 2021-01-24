@@ -37,7 +37,6 @@ Tristan Bond - [tbond4](https://github.com/tbond4)
 
 Francine Babauta - [fbabauta](https://github.com/fbabauta)
 
-
 Stanislava Medigovik - [smedigo](https://github.com/smedigo)
 
 
