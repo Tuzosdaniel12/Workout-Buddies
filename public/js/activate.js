@@ -12,7 +12,7 @@ const handleActivation = async e => {
   await activate(activation).catch(err => {
     console.log(err, "error");
   });
-  return;
+  return window.location.replace("/");
 };
 
 const activate = activation => {

@@ -4,8 +4,8 @@
           <div class="custom-flex">
             <img class="logo" src="./assets/images/signup.png">
             <div>
-              <h1 class="display-4 fw-bolder custom-title text-dark">WorkOut Buddies</h1>
-              <small class="lead fw-bold text-white">Experience life style change with friends!!</small>
+              <h1 class="display-4 fw-bolder custom-title">WorkOut Buddies</h1>
+              <small class="lead fw-bold">Experience life style change with friends!!</small>
             </div>
           </div>
         </div>
@@ -25,7 +25,10 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="password-input" name="password"  placeholder="Password">
           </div>
-          <p>{{message}}</p>
+          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> <span class="msg"></span>
+          </div>
           <button type="submit" value="submit" class="btn btn-default">Login</button>
         </form>
         <br />
