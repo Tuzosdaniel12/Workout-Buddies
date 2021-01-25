@@ -40,7 +40,6 @@ body{
     width: 20%;
     height: 20%;
 }
-
 .custom-mx{
     margin-left: 0;
     margin-right: 0;
@@ -48,9 +47,7 @@ body{
 #custom-height{
   height:350px;
 }
-
 @media (min-width: 469px) {
-
     .logo{
         width: 10%;
         height: 20%;
@@ -65,7 +62,6 @@ body{
     }
   }
 @media (min-width: 764px) {
-
   #custom-height{
     height:300px;
   }
@@ -73,9 +69,7 @@ body{
         margin-top: 4%;
     }
   }
-
   @media (min-width: 1200px) {
-
     .custom-title{
         margin-top: 12%;
     }
