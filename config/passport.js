@@ -28,6 +28,10 @@ passport.use(
           return done(null, false, {
             message: "Incorrect password."
           });
+        } else if (dbUser.emailBoolean === false) {
+          return done(null, false, {
+            message: "Activate Account."
+          });
         }
         // If none of the above, return the user
         return done(null, dbUser);

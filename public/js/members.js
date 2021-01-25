@@ -5,3 +5,8 @@ $(document).ready(() => {
     $(".member-name").text(data.email);
   });
 });
+
+$(".dropdown-toggle").on("click", e => {
+  e.preventDefault();
+  $(".dropdown-menu, #overlay").toggleClass("show");
+});

@@ -3,9 +3,8 @@ require("dotenv").config();
 const db = require("../models");
 const router = require("express").Router();
 const passport = require("../config/passport");
-const JWT = require("../config/jwt.js");
+const CreateTokens = require("../util/CreateTokens");
 const Mail = require("../config/mail.js");
-const private = require("../config/options.js")("private");
 const BMI = require("../util/bmi");
 
 // Using the passport.authenticate middleware with our local strategy.
@@ -35,14 +34,6 @@ router.post("/api/signup", async (req, res) => {
   if (dbUser.length >= 1) {
     res.status(400).json("User with email already exists.");
   }
-
-  const Jwt = new JWT();
-  const token = await Jwt.sign({ email: email }, private, "10min").catch(
-    err => {
-      console.error(err);
-    }
-  );
-
   const bmiCal = new BMI();
 
   let bmi = await bmiCal.getRequest(age, weight * 0.453592, height * 2.54);
@@ -74,9 +65,20 @@ router.post("/api/signup", async (req, res) => {
     return res.status(401).json(err);
   });
 
+  const Tokens = new CreateTokens();
+
+  const key = await Tokens.key();
+
+  await db.Tokens.create({
+    token: await Tokens.sign(email),
+    key: key
+  }).catch(err => {
+    console.error(err);
+  });
+
   const mail = new Mail();
 
-  if (mail.sendMail(email, token)) {
+  if (mail.sendMail(email, key, "activate")) {
     return res.json({
       message:
         "We created your account an Email has been sent, kindly activate your account"

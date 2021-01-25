@@ -10,12 +10,9 @@ class JWT {
     return token;
   }
   async verify(token, access) {
-    this.jwt.verify(token, access, async (err, decodedToken) => {
-      if (err) {
-        return err;
-      }
-      return decodedToken;
-    });
+    const decoded = await this.jwt.verify(token, access);
+    console.log(decoded)
+    return decoded;
   }
 }
 
