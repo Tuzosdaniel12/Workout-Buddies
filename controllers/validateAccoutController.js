@@ -17,7 +17,6 @@ module.exports = async (req, res) => {
   if (decodedToken === undefined) {
     return res.redirect(400, "/");
   }
-  console.log(decodedToken);
   const { email } = decodedToken;
 
   await User.update(
@@ -31,5 +30,6 @@ module.exports = async (req, res) => {
       .json(err)
       .res.redirect("/");
   });
+
   res.redirect("/");
 };

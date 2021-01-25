@@ -31,12 +31,12 @@ app.use(passport.session());
 //routes
 const authRoutes = require("./routes/authRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
-const activation = require("./routes/activateAccountRoute")
+const activation = require("./routes/activateAccountRoute");
 
 app.use(authRoutes, activation, htmlRoutes);
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",

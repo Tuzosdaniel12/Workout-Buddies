@@ -53,8 +53,14 @@ $(document).ready(() => {
   // Otherwise we log any errors
   function signUpUser(userData) {
     $.post("/api/signup", userData)
-      .then(() => {
-        window.location.replace("/");
+      .then(response => {
+        $("#thank-you-modal").show();
+        $("#response").text(response);
+
+        setTimeout(() => {
+          window.location.replace("/activate");
+        }, 8000);
+
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
@@ -64,6 +70,11 @@ $(document).ready(() => {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
+  $("#modal-close-btn").on("click", e => {
+    e.preventDefault();
+    $("#thank-you-modal").hide();
+  });
 
   singupForm.on("submit", handleUserData);
   formBtn.on("click", handleUserData);
