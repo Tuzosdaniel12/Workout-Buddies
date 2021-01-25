@@ -31,11 +31,6 @@ body{
     background-color: rgba(173, 165, 165, 0.5);
     color: #333333;
 }
-.card-background{
-    background-color: white;
-    width: 100%;
-}
-
 .logo{
     width: 20%;
     height: 20%;
@@ -46,6 +41,7 @@ body{
 }
 #custom-height{
   height:350px;
+  width: 100%;
 }
 @media (min-width: 469px) {
     .logo{
