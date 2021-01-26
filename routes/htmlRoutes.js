@@ -20,18 +20,10 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/create", (req, res) => {
-  // If the user already has an account send them to the members page
-  // if (!req.user) {
-  //   res.redirect("/");
-  // }
   res.render("createOrUpdate", { title: "Create" });
 });
 
 router.get("/update", (req, res) => {
-  // // If the user already has an account send them to the members page
-  // if (!req.user) {
-  //   res.redirect("/");
-  // }
   res.render("createOrUpdate", { title: "Update" });
 });
 

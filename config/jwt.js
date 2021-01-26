@@ -11,7 +11,7 @@ class JWT {
   }
   async verify(token, access) {
     const decoded = await this.jwt.verify(token, access);
-    console.log(decoded)
+    console.log(decoded);
     return decoded;
   }
 }
