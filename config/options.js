@@ -8,7 +8,8 @@ const options = {
   mailgun: process.env.MAILGUN,
   port: process.env.PORT,
   secret: process.env.SECRETE_SESSION,
-  algo: process.env.ALGO
+  algo: process.env.ALGO,
+  bmiAPi: process.env.BMI_API
 };
 
 module.exports = key => options[key];
