@@ -30,6 +30,48 @@ $(() => {
     };
   });
 
+  
+
+    // 3). Click event to go to create page
+
+    $(".create-newpage").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+  
+      var newPage = {
+        name: $("#newpage").val().trim(),
+        newPage: $("[name=newpage]:page").val().trim()
+      };
+    });
+  
+
+    // 4). click event to go see progress of bmi
+
+
+
+    // 5). click event to go to update stats page
+
+    $(".update-stats-page").on("click", function (event) {
+      var id = $(this).data("id");
+      var newStats = $(this).data("newstats");
+
+      var newStats = {
+        stats: newStats
+      };
+    });
+
+      // 6). click event to go to see all workout
+
+      $(".update-eye-open").on("click", function (event) {
+        var id = $(this).data("id");
+        var eyeOpen = $(this).data("eyeOpen");
+    
+        var eyeOpen = {
+          button: eyeOpen
+        };
+      });
+
+      
   // or we could use
   // $(document).ready(function() {
   //   // RELOAD PAGE ON BUTTON CLICK EVENT.
