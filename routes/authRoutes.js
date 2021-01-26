@@ -80,9 +80,10 @@ router.post("/api/signup", async (req, res) => {
   const mail = new Mail();
 
   if (mail.sendMail(email, key, "activate")) {
-    return res.json(
-      "We created your account an Email has been sent, kindly activate your account"
-    );
+    return res.json({
+      message:
+        "We created your account an Email has been sent, kindly activate your account"
+    });
   }
   return res.json({
     error: "error"

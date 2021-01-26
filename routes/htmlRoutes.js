@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const db = require("../models");
 
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -8,6 +9,7 @@ router.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/members");
   }
+
   res.render("index");
 });
 
@@ -20,11 +22,24 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/create", (req, res) => {
-  res.render("createOrUpdate", { title: "Create" });
+  res.render("createOrUpdate", {
+    action: "Create",
+    title: "Title",
+    description: "Description"
+  });
 });
 
-router.get("/update", (req, res) => {
-  res.render("createOrUpdate", { title: "Update" });
+router.get("/update/workout/:id", async (req, res) => {
+  const viewOne = await db.Workouts.findOne({
+    where: { id: req.params.id }
+  });
+
+  const renderData = {
+    viewOne: viewOne,
+    action: "Update"
+  };
+
+  res.render("createOrUpdate", renderData);
 });
 
 router.get("/activate", (req, res) => {
@@ -32,11 +47,29 @@ router.get("/activate", (req, res) => {
 });
 // Here we've add our isAuthenticated middleware to this route.
 // If a user who is not logged in tries to access this route they will be redirected to the signup page
-router.get("/members", isAuthenticated, (req, res) => {
+router.get("/members", isAuthenticated, async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
-  res.render("members");
+
+  const viewOne = await db.SavedWorkouts.findOne({
+    where: { publicBoolean: 1 }
+  });
+
+  const results = await db.SavedWorkouts.findAll({
+    where: { userID: req.params.id },
+    include: [{ model: db.Workouts }]
+  });
+  const renderData = {
+    bmi: req.user.bmi,
+    workouts: results,
+    title: viewOne[0].dataValues.title,
+    category: viewOne[0].dataValues.category,
+    name: viewOne[0].dataValues.name,
+    description: viewOne[0].dataValues.description
+  };
+
+  res.render("members", renderData);
 });
 
 module.exports = router;

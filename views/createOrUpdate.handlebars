@@ -5,7 +5,7 @@
         <img class="logo" src="./assets/images/signup.png">
         <div>
           <h1 class="display-4 fw-bolder custom-title text-dark">WorkOut Buddies</h1>
-          <p class="lead">{{title}} Exercise Program</p>
+          <p class="lead">{{action}} Exercise Program</p>
         </div>
         
       </div>     
@@ -14,12 +14,13 @@
 </div>
 
 <div class="container"> 
-    <div class="col-md-6 col-md-offset-3 background">
+    <div class="row justify-content-md-center custom-mx">
+      <div class="col-md-9 col-lg-6 background">
         <div class="mb-3 pb-3">
         <label for="name of the workout Input1" class="form-label">Name of the Workout</label>
-        <input type="name" class="form-control" id="nameOfTheWorkoutInput1" placeholder="nameoftheworkout">
-        </div>
-    <p></p>
+        <input type="name" class="form-control" id="nameOfTheWorkoutInput1" placeholder="{{title}}">
+      </div>
+      <p></p>
         <div class="mb-3">
         <label for="cathegory Input1" class="form-label">Category</label>
         {{!-- <input type="category" class="form-control" id="categoryInput1" placeholder="category"> --}}
@@ -34,14 +35,14 @@
         </div>
         
         <div class="mb-2">
-        <label for="exerciseprogramTextarea1" class="form-label">Exercise Program</label>
-        <textarea class="form-control" id="exerciseprogramTextarea1" rows="10"></textarea>
+          <label for="exerciseprogramTextarea1" class="form-label">Exercise Program</label>
+          <textarea class="form-control" id="exerciseprogramTextarea1" rows="10">{{description}}</textarea>
         </div>
-    
-    
+
         <div class="text-right">
-        <a href=""><button class="btn btn-lg btn-primary" id="CUBtn" data-id={{id}}><span class="fa fa-list-alt"></span> {{title}}</button></a>
+          <a href=""><button class="btn btn-lg btn-primary" id="CUBtn" data-id={{id}}><span class="fa fa-list-alt"></span> {{action}}</button></a>
         </div>
+      </div>
   </div>
 </div>
 <script type="text/javascript" src="../public/js/createOrUpdate.js"></script>
