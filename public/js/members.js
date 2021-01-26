@@ -34,6 +34,8 @@ $(function () {
     };
   });
 
+  
+
     // or we could use 
     // $(document).ready(function() {
     //   // RELOAD PAGE ON BUTTON CLICK EVENT.
@@ -72,7 +74,16 @@ $(function () {
 
       // 6). click event to go to see all workout
 
+      $(".update-eye-open").on("click", function (event) {
+        var id = $(this).data("id");
+        var eyeOpen = $(this).data("eyeOpen");
+    
+        var eyeOpen = {
+          button: eyeOpen
+        };
+      });
 
+      
 
 
       // 7). Get route to see workout in display box, send in id
