@@ -6,83 +6,48 @@ $(document).ready(() => {
   });
 });
 
-// // 1). Create AJAX DELETE and SAVE REQUEST ?
-// $(() => {
-//   $(".delete-workout").on("click", function(event) {
-//     const id = $(this).data("id");
+// 1). Create AJAX DELETE and SAVE REQUEST ?
 
-//     $.ajax("/api/members/" + id, {
-//       type: "DELETE"
-//     }).then(() => {
-//       console.log("deleted workout", id);
+$(".delete-workout").on("click", function(event) {
+  event.preventDefault();
+  const id = $(this).data("id");
 
-//       location.reload();
-//     });
-//   });
+  $.ajax("/api/SavedWorkouts/" + id, {
+    type: "DELETE"
+  }).then(() => {
+    console.log("deleted workout", id);
 
-//   // 2). Click event to go to update page
-//   $(".update-page").on("click", function(event) {
-//     const id = $(this).data("id");
-//     const newWorkout = $(this).data("newworkout");
+    location.reload();
+  });
+});
 
-//     const workout = {
-//       workout: newWorkout
-//     };
-//   });
+// 2). Click event to go to update page green button
+$(".update-page").on("click", function(event) {
+  event.preventDefault();
+  const id = $(this).data("id");
 
-//   // or we could use
-//   // $(document).ready(function() {
-//   //   // RELOAD PAGE ON BUTTON CLICK EVENT.
-//   //     $('#update_page').click(function () {
-//   //         location.update(true);
-//   //     });
-//   // });
+  window.location.replace("/update/workout/" + id);
+});
 
-//   // 3). Click event to go to create page
+// 6). click event to go to see all workout
 
-//   $(".create-newpage").on("submit", event => {
-//     // Make sure to preventDefault on a submit event.
-//     event.preventDefault();
+$(".update-eye-open").on("click", function(event) {
+  event.preventDefault();
+  const data = { id: $(this).data("id") };
+  if ($(this).data("publicBoolean")) {
+    //zero is false
+    data.publicBoolean = 0;
+  } else {
+    //one is true
+    data.publicBoolean = 1;
+  }
+  $.put("/api/savedworkouts/update/boolean" + data.id, {
+    data
+  }).then(() => {
+    window.location.replace("/members");
+  });
+});
 
-//     const newPage = {
-//       name: $("#newpage")
-//         .val()
-//         .trim(),
-//       newPage: $("[name=newpage]:page")
-//         .val()
-//         .trim()
-//     };
-//   });
-
-//   // 4). click event to go see progress of bmi
-
-//   // 5). click event to go to update stats page
-
-//   $(".update-stats-page").on("click", function(event) {
-//     const id = $(this).data("id");
-//     var newStats = $(this).data("newstats");
-
-//     var newStats = {
-//       stats: newStats
-//     };
-//   });
-
-//   // 6). click event to go to see all workout
-
-//   // 7). Get route to see workout in display box, send in id
-
-//   app.get("/api/members/:id", (req, res) => {
-//     db.workout_buddies_db
-//       .findWorkout({
-//         where: {
-//           id: req.params.id
-//         }
-//       })
-//       .then(workout_buddies_db => {
-//         res.json(workout_buddies_db);
-//       });
-//   });
-// });
 $(".dropdown-toggle").on("click", e => {
   e.preventDefault();
   $(".dropdown-menu, #overlay").toggleClass("show");
