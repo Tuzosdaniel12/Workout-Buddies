@@ -91,3 +91,7 @@ $(function () {
 
 
     });
+$(".dropdown-toggle").on("click", e => {
+  e.preventDefault();
+  $(".dropdown-menu, #overlay").toggleClass("show");
+});

@@ -35,19 +35,14 @@ body{
     width: 20%;
     height: 20%;
 }
-
-
 .custom-mx{
     margin-left: 0;
     margin-right: 0;
 }
-.background-white {
-  background-color: white;
-  height: 50%;
+#custom-height{
+  height:350px;
 }
-
 @media (min-width: 469px) {
-
     .logo{
         width: 10%;
         height: 20%;
@@ -62,31 +57,16 @@ body{
     }
   }
 @media (min-width: 764px) {
-
+  #custom-height{
+    height:300px;
+  }
     .custom-title{
         margin-top: 4%;
     }
   }
-
   @media (min-width: 1200px) {
-
     .custom-title{
         margin-top: 12%;
     }
   }
 
-/* Stylesheet for members login */
-
-.container {
-  padding: 2rem 0rem;
-}
-
-h4 {
-  margin: 2rem 0rem 1rem;
-}
-
-.table-image {
-  td, th {
-    vertical-align: middle;
-  }
-}
