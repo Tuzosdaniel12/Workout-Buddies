@@ -17,7 +17,7 @@ const handleActivation = async e => {
 
 const activate = activation => {
   return $.ajax({
-    url: "/api/activate/" + activation.key,
+    url: "/api/activate",
     data: activation,
     method: "PUT"
   });

@@ -23,9 +23,9 @@ $(() => {
   // 2). Click event to go to update page
   $(".update-page").on("click", function(event) {
     const id = $(this).data("id");
-    var newWorkout = $(this).data("newworkout");
+    const newWorkout = $(this).data("newworkout");
 
-    var newWorkout = {
+    const workout = {
       workout: newWorkout
     };
   });
