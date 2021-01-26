@@ -1,0 +1,65 @@
+<div class="jumbotron jumbo-bg">
+    <div class="container bg-transparent">
+        <a href="/">
+          <div class="custom-flex">
+            <img class="logo" src="./assets/images/signup.png">
+            <div>
+              <h1 class="display-4 fw-bolder custom-title text-dark">{{name}} WorkOuts</h1>
+              <small class="lead fw-bold">Welcome Back Buddie!!</small>
+              <br>
+            </div>
+          </div>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center custom-mx">
+      <div class="col-12 col-md-8 overflow-y" id="custom-height">
+      <table class="table table-hover mt-3 mb-3 background">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30%">Current Weight</th>
+            <th scope="col" style="width: 20%">Height</th>
+            <th scope="col" style="width: 20%">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each user}}
+            <tr>
+              <td>{{weight}}</td>
+              <td>{{height}}</td>
+              <td>{{name}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-12 col-md-4 overflow-y" id="custom-height">
+      <table class="table table-hover mt-3 mb-3 background">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30%">Date</th>
+            <th scope="col" style="width: 20%">Historical BMI</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each bmi}}
+            <tr>
+              <td>{{updatedAt}}</td>
+              <td>{{name}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <div class="text-right">
+          <a href="/"><button class="btn btn-lg btn-primary" id="CUBtn" ><span class="fa fa-list-alt"></span> Home</button></a>
+        </div>
+    </div>
+
+    
+  </div>
+
+  
+</div>
