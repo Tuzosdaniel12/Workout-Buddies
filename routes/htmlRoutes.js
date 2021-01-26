@@ -45,6 +45,18 @@ router.get("/update/workout/:id", async (req, res) => {
 router.get("/activate", (req, res) => {
   res.render("activate");
 });
+
+router.get("/progress", (req, res) => {
+  res.render("progress");
+});
+
+router.get("/updatestats", (req, res) => {
+  res.render("updatestats");
+});
+
+router.get("/allworkouts", (req, res) => {
+  res.render("allworkouts");
+});
 // Here we've add our isAuthenticated middleware to this route.
 // If a user who is not logged in tries to access this route they will be redirected to the signup page
 router.get("/members", isAuthenticated, async (req, res) => {
@@ -57,7 +69,7 @@ router.get("/members", isAuthenticated, async (req, res) => {
   // });
 
   //const results = await db.SavedWorkouts.findAll({
-  //   where: { UserId: req.params.id },
+  //   where: { UserId: req.user.id },
   //   include: [{ model: db.Workouts }]
   // });
   // const renderData = {

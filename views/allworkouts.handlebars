@@ -4,10 +4,8 @@
           <div class="custom-flex">
             <img class="logo" src="./assets/images/signup.png">
             <div>
-              <h1 class="display-4 fw-bolder custom-title text-dark">{{name}} WorkOuts</h1>
-              <small class="lead fw-bold">Welcome Back Buddie!!</small>
-              <br>
-              <small>Your BMI:{{bmi}}</small>
+              <h1 class="display-4 fw-bolder custom-title text-dark">More WorkOuts</h1>
+              <small class="lead fw-bold">See all workouts!!</small>
             </div>
           </div>
         </a>
@@ -32,7 +30,7 @@
                     <a class="dropdown-item" href="/create">Create New Workout</a>
                     <a class="dropdown-item" href="/progress">Progress</a>
                     <a class="dropdown-item" href="/updatestats">Update Stats</a>
-                    <a class="dropdown-item" href="/allworkouts">All Workouts</a>
+                    <a class="dropdown-item" href="/allworkouts" data-see-all="false">All Workouts</a>
                     <a class="dropdown-item" href="/logout">Logout</a>
                   </div>
               </div>
@@ -46,10 +44,8 @@
               <td>{{name}}</td>
               <td>{{category}}</td>
               <td>
-                <button type="button" class="btn btn-warning" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-success" data-publicBoolean="0"  data-id="{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-danger" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-primary" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                  <button type="button" class="btn btn-warning" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                  <button type="button" class="btn btn-primary" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button> 
               </td>
             </tr>
           {{/each}}
