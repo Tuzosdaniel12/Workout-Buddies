@@ -54,8 +54,9 @@ $(document).ready(() => {
   function signUpUser(userData) {
     $.post("/api/signup", userData)
       .then(response => {
+        console.log(response);
         $("#thank-you-modal").show();
-        $("#response").text(response);
+        $("#response").text(response.message);
 
         setTimeout(() => {
           window.location.replace("/activate");
