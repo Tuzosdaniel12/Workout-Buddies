@@ -36,14 +36,6 @@ $(function () {
 
   
 
-    // or we could use 
-    // $(document).ready(function() {
-    //   // RELOAD PAGE ON BUTTON CLICK EVENT.
-    //     $('#update_page').click(function () {
-    //         location.update(true); 
-    //     });
-    // });
-
     // 3). Click event to go to create page
 
     $(".create-newpage").on("submit", function(event) {
