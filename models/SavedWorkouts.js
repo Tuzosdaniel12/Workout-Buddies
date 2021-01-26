@@ -3,6 +3,10 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    publicBoolean: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
 

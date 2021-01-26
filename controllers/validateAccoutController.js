@@ -4,7 +4,7 @@ const secret = require("../config/options")("private");
 
 module.exports = async (req, res) => {
   const { token } = await Tokens.findOne({
-    where: { key: req.params.key }
+    where: { key: req.body.key }
   }).catch(err => {
     console.error(err).res.redirect("/");
   });
