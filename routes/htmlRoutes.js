@@ -52,24 +52,24 @@ router.get("/members", isAuthenticated, async (req, res) => {
     res.redirect("/");
   }
 
-  const viewOne = await db.SavedWorkouts.findOne({
-    where: { publicBoolean: 1 }
-  });
+  // const viewOne = await db.SavedWorkouts.findOne({
+  //   where: { publicBoolean: 1 }
+  // });
 
-  const results = await db.SavedWorkouts.findAll({
-    where: { userID: req.params.id },
-    include: [{ model: db.Workouts }]
-  });
-  const renderData = {
-    bmi: req.user.bmi,
-    workouts: results,
-    title: viewOne[0].dataValues.title,
-    category: viewOne[0].dataValues.category,
-    name: viewOne[0].dataValues.name,
-    description: viewOne[0].dataValues.description
-  };
+  //const results = await db.SavedWorkouts.findAll({
+  //   where: { UserId: req.params.id },
+  //   include: [{ model: db.Workouts }]
+  // });
+  // const renderData = {
+  //   bmi: req.user.bmi,
+  //   workouts: results,
+  //   title: viewOne[0].dataValues.title,
+  //   category: viewOne[0].dataValues.category,
+  //   name: viewOne[0].dataValues.name,
+  //   description: viewOne[0].dataValues.description
+  // };
 
-  res.render("members", renderData);
+  res.render("members");
 });
 
 module.exports = router;
