@@ -5,6 +5,7 @@ module.exports = function(req, res, next) {
     return next();
   }
   if (!req.user) {
+    res.redirect("/");
     res.status(401);
     res.end(info.message);
   }

@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
 
       validate: {
-        isNumeric: true
+        isInt: true
       }
     },
 
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
 
       validate: {
-        isNumeric: true
+        isInt: true
       }
     },
 
@@ -60,16 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
 
       validate: {
-        isNumeric: true
-      }
-    },
-    bmi: {
-      type: DataTypes.INTEGER,
-
-      allowNull: false,
-
-      validate: {
-        isNumeric: true
+        isInt: true
       }
     },
     gender: {

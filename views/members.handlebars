@@ -1,0 +1,73 @@
+<div class="jumbotron jumbo-bg">
+    <div class="container bg-transparent">
+        <a href="/">
+          <div class="custom-flex">
+            <img class="logo" src="./assets/images/signup.png">
+            <div>
+              <h1 class="display-4 fw-bolder custom-title text-dark">{{name}} WorkOuts</h1>
+              <small class="lead fw-bold">Welcome Back Buddie!!</small>
+              <br>
+              <small>Your BMI:{{bmi}}</small>
+            </div>
+          </div>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 overflow-y" id="custom-height">
+      <table class="table table-hover mt-3 mb-3 background">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30%">Workout Name</th>
+            <th scope="col" style="width: 20%">Author</th>
+            <th scope="col" style="width: 10%">Category</th>
+            <th scope="col" style="width: 15%">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Create New Workout</a>
+                    <a class="dropdown-item" href="#">Progress</a>
+                    <a class="dropdown-item" href="#">Update Stats</a>
+                    <a class="dropdown-item" href="#">All Workouts</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                  </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each workout}}
+            <tr>
+              <td>{{title}}</td>
+              <td>{{name}}</td>
+              <td>{{category}}</td>
+              <td>
+                <button type="button" class="btn btn-warning" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-success" data-id="{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-primary" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-12 card mt-5 card-background">
+    <div class="card-header">
+      <h4>View WorkOut</h4>
+    </div>
+    <div class="card-body">
+      <h3>{{title}}</h3>
+      <p>{{category}}</p>
+      <p>{{name}}</p>
+      <p class="card-text">{{description}}</p>
+    </div>
+  </div>
+</div>
+

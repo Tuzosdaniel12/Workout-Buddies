@@ -7,18 +7,20 @@ class Mail {
     this.mailgun = require("./options.js")("mailgun");
     this.mailPass = require("./options.js")("mailPass");
   }
-  html(token) {
+  html(key, action) {
     return `<h2>Welcome to Working Out Buddies</h2>
-          <a href="http://localhost:/8080/activate/${token}">PRESS LINK TO ACTIVATE ACCOUNT</a>
+          <h3>Activation Code:${key}</h3>
+          <a href="http://localhost:/3000/${action}">PRESS LINK TO ACTIVATE ACCOUNT</a>
+
          <p>expires in five minutes</p>`;
   }
-  mailOptions(email, token) {
+  mailOptions(email, key, action) {
     return {
       from: "noreply@workingoutbuddies.com",
       to: email,
       subject: "Account Activation Link",
       text: `Welcome to Workout Buddies`,
-      html: this.html(token)
+      html: this.html(key, action)
     };
   }
   createTransporter() {
@@ -35,9 +37,9 @@ class Mail {
       }
     });
   }
-  async sendMail(email, token) {
+  async sendMail(email, key, action) {
     const transporter = await this.createTransporter();
-    const mailOptions = await this.mailOptions(email, token);
+    const mailOptions = await this.mailOptions(email, key, action);
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
