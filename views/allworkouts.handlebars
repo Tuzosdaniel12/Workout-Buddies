@@ -37,14 +37,14 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="action-buttons">
           {{#each workouts}}
             <tr>
               <td>{{title}}</td>
               <td>{{name}}</td>
               <td>{{category}}</td>
-              <td id="action-buttons">
-                  <button type="button" class="btn btn-warning btn-sm" data-bool={{bool}} data-action="view-workout" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+              <td>
+                  <button type="button" class="btn btn-warning btn-sm" data-action="view" data-bool="{{bool}}" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
                   <button type="button" class="btn btn-success btn-sm" data-action="save" data-id="{{id}}"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button> 
               </td>
             </tr>

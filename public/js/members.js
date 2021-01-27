@@ -59,10 +59,24 @@ function handleBtnAction(e) {
   e.preventDefault();
   const data = { id: $(this).data("id") };
   const action = $(this).data("action");
+  console.log($(this).data("action"));
   switch (action) {
   case "view" :
-    data.bool = $(this).data("bool");
+    console.log("here");
+    if(!($(this).data("bool"))){
+      data.bool = 1;
+      console.log("hit", data.bool);
+    }
     data.current = $("#current-workout").data("id");
+    $.ajax("/api/SavedWorkouts/" + data.id, {
+      type: "PUT",
+      data: data
+    }).then(() => {
+      console.log("deleted workout", data.id);
+  
+      location.reload();
+    });
+
     break;
   case "update" :
     //data.id
@@ -82,8 +96,9 @@ function handleBtnAction(e) {
   case "view-workout" :
     break;
   case "save" :
-    $.ajax("/api/SavedWorkouts/" + data.id, {
-      type: "PUT"
+    $.ajax("/api/SavedWorkouts", {
+      type: "POST",
+      data:data
     }).then(() => {
       console.log("updated workout", data.id);
   

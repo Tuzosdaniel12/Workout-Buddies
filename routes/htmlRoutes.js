@@ -92,7 +92,7 @@ router.get("/members", isAuthenticated, async (req, res) => {
       { model: db.User }
     ]
   });
-  console.log(results);
+
   const workouts = results.map(workout => {
     return {
       id: workout.dataValues.id,

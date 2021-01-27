@@ -39,13 +39,13 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="action-buttons">
           {{#each workouts}}
             <tr>
               <td>{{title}}</td>
               <td>{{author}}</td>
               <td>{{category}}</td>
-              <td id="action-buttons">
+              <td >
                 <button type="button" class="btn btn-warning btn-sm"   data-bool= {{bool}} data-action="view" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
                 <button type="button" class="btn btn-success btn-sm"  data-action="update" data-id="{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                 <button type="button" class="btn btn-danger btn-sm"  data-action="delete" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
