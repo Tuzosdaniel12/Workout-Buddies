@@ -3,12 +3,15 @@ const JWT = require("../config/jwt");
 const secret = require("../config/options")("private");
 
 module.exports = async (req, res) => {
-  const { token } = await Tokens.findOne({
+  const tkn = await Tokens.findOne({
     where: { key: req.body.key }
-  }).catch(err => {
-    console.error(err).res.redirect("/");
+  }).catch(() => {
+    return res.json({ error: "No account created yet" });
   });
-
+  if (!tkn) {
+    return res.json({ error: "No account created yet" });
+  }
+  const { token } = tkn;
   const Jwt = new JWT();
   const decodedToken = await Jwt.verify(token, secret).catch(err => {
     console.error(err);

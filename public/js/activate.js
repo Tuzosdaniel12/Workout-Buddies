@@ -9,10 +9,22 @@ const handleActivation = async e => {
       .trim()
   };
 
-  await activate(activation).catch(err => {
+  const result = await activate(activation).catch(err => {
+    $("#thank-you-modal").show();
+    $("#notification").text("Errors");
     console.log(err, "error");
   });
-  return window.location.replace("/");
+  if (result.error) {
+    $("#thank-you-modal").show();
+    $("#notification").text("Invalid Account");
+    $("#response").text(result.error);
+
+    setTimeout(() => {
+      window.location.replace("/activate");
+    }, 4000);
+  }
+
+  //return window.location.replace("/");
 };
 
 const activate = activation => {

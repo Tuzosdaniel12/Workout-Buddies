@@ -1,49 +1,25 @@
-<div class="jumbotron jumbo-bg">
-    <div class="container bg-transparent">
-        <a href="/">
-          <div class="custom-flex">
-            <img class="logo" src="./assets/images/signup.png">
-            <div>
-              <h1 class="display-4 fw-bolder custom-title text-dark">{{name}} WorkOuts</h1>
-              <small class="lead fw-bold">Welcome Back Buddie!!</small>
-              <br>
-            </div>
-          </div>
-        </a>
-    </div>
-</div>
+ {{> jumbo/log-block }}
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text"> content</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Current Weight</li>
-    <li class="list-group-item">Height</li>
-    <li class="list-group-item">Age</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
+<div class="container">
+  <div class="row justify-content-md-center custom-mx">
+      <div class="card col-12 col-md-8 mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Your Current Stats</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between"><p>Current Weight:</p><p>{{weight}} lb</p></li>
+          <li class="list-group-item d-flex justify-content-between"><p>Height:</p><p>{{height}} ft</p></li>
+          <li class="list-group-item d-flex justify-content-between"><p>Age:</p><p>{{age}} years</p></li>
+        </ul>
+        <div class="card-body">
+          <a href="/" class="card-link">Home</a>
+          <br>
+          <a href="/" class="card-link">Workouts</a>
+        </div>
+      </div>
 
-        <tbody>
-          {{#each user}}
-            <tr>
-              <td>{{weight}}</td>
-              <td>{{height}}</td>
-              <td>{{age}}</td>
-              <td>{{name}}</td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-12 col-md-4 overflow-y" id="custom-height">
-      <table class="table table-hover mt-3 mb-3 background">
+    <div class="col-12 col-md-4 overflow-y custom-padding" id="custom-height">
+      <table class="table table-hover custom-background" style="width: 100%">
         <thead>
           <tr>
             <th scope="col" style="width: 30%">Date</th>
@@ -51,21 +27,14 @@
           </tr>
         </thead>
         <tbody>
-          {{#each bmi}}
+          {{#each renderData}}
             <tr>
-              <td>{{updatedAt}}</td>
-              <td>{{name}}</td>
+              <td>{{createdAt}}</td>
+              <td class="text-center"><span id="bmi">{{bmi}}</span></td>
             </tr>
           {{/each}}
         </tbody>
       </table>
-      <div class="text-right">
-          <a href="/"><button class="btn btn-lg btn-primary" id="CUBtn" ><span class="fa fa-list-alt"></span> Home</button></a>
-        </div>
     </div>
-
-    
   </div>
-
-  
 </div>

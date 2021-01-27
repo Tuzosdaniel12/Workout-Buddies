@@ -1,30 +1,18 @@
-<div class="jumbotron jumbo-bg">
-  <a href="/">
-    <div class="container bg-transparent">
-      <div class="custom-flex">
-        <img class="logo" src="./assets/images/signup.png">
-        <div>
-          <h1 class="display-4 fw-bolder custom-title">WorkOut Buddies</h1>
-          <small class="lead fw-bold">Update Stats</small>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
+ {{> jumbo/action-block }} 
 
 <div class="container">
     <div class="row justify-content-md-center custom-mx">
       <div class="col-md-8 col-lg-6 background">
         <h2>Update Stats</h2>
-        <form id="signup">
+        <form id="updatestats">
             
           <div class="form-group">
             <label for="exampleInputWeight1">Weight</label>
-            <input type="weight"  name="weight" class="form-control" id="weight-input" placeholder="Weight">
+            <input type="weight"  name="weight" class="form-control" id="weight-input" placeholder="{{weight}}">
           </div>
           <div class="form-group">
             <label for="exampleInputAge1">Age</label>
-            <input type="age" class="form-control" age="age"  id="age-input" placeholder="Age">
+            <input type="age" class="form-control" age="age"  id="age-input" placeholder="{{age}}">
           </div>
           <div class="form-group">
             <label for="exampleInputHeight1">Height</label>
@@ -60,7 +48,7 @@
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
           </div>
-          <button type="submit" class="btn btn-primary submit" id="updatestatsformbtn">Update Stats</button>
+          <button type="submit" class="btn btn-primary submit" id="updatestatsformbtn">{{action}}</button>
         </form>
         <br />
         <p>Lets go <a href="/">Home</a></p>

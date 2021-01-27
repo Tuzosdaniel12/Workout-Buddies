@@ -1,24 +1,10 @@
-<div class="jumbotron jumbo-bg">
-  <a href="/">
-    <div class="container bg-transparent">
-      <div class="custom-flex">
-        <img class="logo" src="./assets/images/signup.png">
-        <div>
-          <h1 class="display-4 fw-bolder custom-title text-dark">WorkOut Buddies</h1>
-          <p class="lead">{{action}} Exercise Program</p>
-        </div>
-        
-      </div>     
-    </div>
-  </a>
-</div>
+ {{> jumbo/action-block }}
 
 <div class="container"> 
     <div class="row justify-content-md-center custom-mx">
       <div class="col-md-9 col-lg-6 background">
         <div class="mb-3 pb-3">
         <label for="name of the workout Input1" class="form-label">Name of the Workout</label>
-        {{!-- <input type="name" class="form-control" id="nameOfTheWorkoutInput1" placeholder="{{title}}"> --}}
         <textarea class="form-control" id="nameOfTheWorkoutInput1" rows="1">{{title}}</textarea>
       </div>
       <p></p>
@@ -43,8 +29,15 @@
         <div class="text-right">
           <a href=""><button class="btn btn-lg btn-primary" id="CUBtn" data-id={{id}}><span class="fa fa-list-alt"></span> {{action}}</button></a>
         </div>
+        <br>
+        <p class="text-right">Lets go <a href="/">Home</a></p>
       </div>
   </div>
 </div>
 
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/login.js"></script>
+  <script type="text/javascript" src="../js/signup.js"></script>
+  <script type="text/javascript" src="../js/activate.js"></script>
+  <script type="text/javascript" src="../js/members.js"></script>
+  <script type="text/javascript" src="../js/createOrUpdate.js"></script>   

@@ -13,6 +13,9 @@ $(document).ready(() => {
     };
 
     if (!userData.email || !userData.password) {
+      $("#thank-you-modal").show();
+      $("#notification").text("Error");
+      $("#response").text("Make sure all fields are filled!!!");
       return;
     }
 
@@ -34,6 +37,11 @@ $(document).ready(() => {
         // If there's an error, log the error
       })
       .catch(err => {
+        $("#thank-you-modal").show();
+        $("#notification").text("Errors");
+        document.getElementById(
+          "response"
+        ).innerHTML = `Create an account!!!<br>Wrong Email or Password<br>Activate Account`;
         console.log(err);
       });
   }
