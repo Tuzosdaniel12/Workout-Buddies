@@ -102,7 +102,8 @@ function handleBtnAction(e) {
     break;
   case "update" :
     //data.id
-    window.location.replace("/update");
+    localStorage.setItem("updateId", JSON.stringify(data.id));
+    window.location.replace("/update/"+data.id);
     break;
   case "delete" :
     $.ajax("/api/SavedWorkouts/" + data.id, {
@@ -130,5 +131,15 @@ function handleBtnAction(e) {
   }
 }
 
+const getDataidToUpdateUser = ()=>{
+  if(JSON.parse(localStorage.getItem("updateId")) !==null){
+    $("#CUBtn").attr("data-id",JSON.parse(localStorage.getItem("updateId")));
+  }
+  else{
+    return;
+  }
+};
+
 checkBmi();
+getDataidToUpdateUser();
 actionBtn.on("click", "[data-id]", handleBtnAction);

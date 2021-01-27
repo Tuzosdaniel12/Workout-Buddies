@@ -49,11 +49,14 @@ body{
  }
 
  .liked-workout{
-    background-color: aqua;
-    border-color: blue;
+     background-color: #1187d6;
+     -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 0px 0px 15px 2px #1669B7; 
+     box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 0px 0px 15px 2px #1669B7;
  }
 
- 
+ .custom-background{
+    background-color:rgba(173, 165, 165, 0.8);
+ }
 @media (min-width: 469px) {
     .logo{
         width: 10%;
@@ -64,10 +67,19 @@ body{
     }
 
   }
+  @media only screen and (max-width: 761px) {
+    .custom-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
   @media (min-width: 600px) {
     body {
         background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     }
+    .custom-background{
+        background-color:rgba(173, 165, 165, 0.5);
+     }
     .sm-view{
         display:inline-block;
      }

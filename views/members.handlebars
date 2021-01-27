@@ -1,18 +1,4 @@
-<div class="jumbotron jumbo-bg">
-    <div class="container bg-transparent">
-        <a href="/">
-          <div class="custom-flex">
-            <img class="logo" src="./assets/images/signup.png">
-            <div>
-              <h1 class="display-4 fw-bolder custom-titl">{{name}} WorkOuts</h1>
-              <small class="lead fw-bold">Welcome Back Buddie!!</small>
-              <br>
-              <span id="bmi">Your BMI: {{bmi}}</span>
-            </div>
-          </div>
-        </a>
-    </div>
-</div>
+ {{> jumbo/log-block }}
 
 <div class="container">
   <div class="row">
@@ -48,9 +34,9 @@
               <td>{{category}}</td>
               <td >
                 <button type="button" class="btn btn-warning btn-sm"   data-bool= {{bool}} data-action="view" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-success btn-sm"  data-action="update" data-id="{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-success btn-sm"  data-action="update" data-id="{{updateId}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                 <button type="button" class="btn btn-danger btn-sm"  data-action="delete" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-primary btn-sm" aria-pressed="false" data-action="like" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-primary btn-sm"  data-action="like" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
               </td>
             </tr>
           {{/each}}

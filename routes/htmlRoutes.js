@@ -32,23 +32,20 @@ router.get("/create", (req, res) => {
   });
 });
 
-router.get("/update", (req, res) => {
+router.get("/update/:id", async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
-  // const viewOne = await db.Workouts.findOne({
-  //   where: { id: req.params.id }
-  // });
+  console.log(req.params.id);
 
-  // const renderData = {
-  //   viewOne: viewOne,
-  //   action: "Update"
-  // };
+  const viewOne = await db.Workouts.findOne({
+    where: { id: req.params.id }
+  });
 
   res.render("createOrUpdate", {
     action: "Update",
-    title: "Title",
-    description: "Description"
+    title: viewOne.dataValues.title,
+    description: viewOne.dataValues.description
   });
 });
 
@@ -56,8 +53,39 @@ router.get("/activate", (req, res) => {
   res.render("activate");
 });
 
-router.get("/progress", (req, res) => {
-  res.render("progress");
+router.get("/progress", async (req, res) => {
+  if (!req.user) {
+    res.redirect("/");
+  }
+
+  const bmiRes = await db.BMI.findAll({
+    where: { UserId: req.user.id },
+    order: [["createdAt", "DESC"]]
+  });
+
+  const renderData = bmiRes.map(el => {
+    return {
+      bmi: el.dataValues.bmi,
+      createdAt: el.dataValues.createdAt
+        .toString()
+        .split(" ")
+        .slice(1, 4)
+        .join(" ")
+    };
+  });
+
+  const bmi = bmiRes[0].dataValues.bmi;
+  const ft = Math.floor(req.user.height / 12);
+  const inches = req.user.height % 12;
+  res.render("progress", {
+    renderData: renderData,
+    name: req.user.name,
+    bmi: bmi,
+    weight: req.user.weight,
+    age: req.user.age,
+    height: `${ft} ' ${inches}`,
+    message: "All Workouts!!"
+  });
 });
 
 router.get("/updatestats", (req, res) => {
@@ -78,6 +106,13 @@ router.get("/allworkouts", async (req, res) => {
   }).catch(err => {
     res.json({ error: err });
   });
+
+  const bmiRes = await db.BMI.findAll({
+    where: { UserId: req.user.id },
+    order: [["createdAt", "DESC"]]
+  });
+
+  const bmi = bmiRes[0].dataValues.bmi;
   const dataRender = workouts.map(workout => {
     return {
       id: workout.dataValues.id,
@@ -91,7 +126,10 @@ router.get("/allworkouts", async (req, res) => {
   });
 
   res.render("allworkouts", {
-    workouts: dataRender
+    workouts: dataRender,
+    name: req.user.name,
+    bmi: bmi,
+    message: "All Workouts!!"
   });
 });
 // Here we've add our isAuthenticated middleware to this route.
@@ -123,14 +161,16 @@ router.get("/members", isAuthenticated, async (req, res) => {
       category: workout.dataValues.Workout.category,
       name: workout.dataValues.User.name,
       description: workout.dataValues.Workout.description,
-      author: workout.dataValues.Workout.User.name
+      author: workout.dataValues.Workout.User.name,
+      updateId: workout.dataValues.Workout.id
     };
   });
 
   res.render("members", {
     workouts: workouts,
     name: req.user.name,
-    bmi: bmi
+    bmi: bmi,
+    message: "Welcome Back Buddie!!"
   });
 });
 
