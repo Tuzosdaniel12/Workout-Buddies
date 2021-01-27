@@ -13,22 +13,28 @@
     </div>
 </div>
 
-<div class="container">
-  <div class="row justify-content-md-center custom-mx">
-      <div class="col-12 col-md-8 overflow-y" id="custom-height">
-      <table class="table table-hover mt-3 mb-3 background">
-        <thead>
-          <tr>
-            <th scope="col" style="width: 30%">Current Weight</th>
-            <th scope="col" style="width: 20%">Height</th>
-            <th scope="col" style="width: 20%">Age</th>
-          </tr>
-        </thead>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text"> content</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Current Weight</li>
+    <li class="list-group-item">Height</li>
+    <li class="list-group-item">Age</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
         <tbody>
           {{#each user}}
             <tr>
               <td>{{weight}}</td>
               <td>{{height}}</td>
+              <td>{{age}}</td>
               <td>{{name}}</td>
             </tr>
           {{/each}}
