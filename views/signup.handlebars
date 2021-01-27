@@ -1,17 +1,5 @@
-<div class="jumbotron jumbo-bg">
-  <a href="/">
-    <div class="container bg-transparent">
-      <div class="custom-flex">
-        <img class="logo" src="./assets/images/signup.png">
-        <div>
-          <h1 class="display-4 fw-bolder custom-title">WorkOut Buddies</h1>
-          <small class="lead fw-bold">Experience life style change with friends!!</small>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
 
+{{> jumbo/jumbo-block}}
 <div class="container">
     <div class="row justify-content-md-center custom-mx">
       <div class="col-md-8 col-lg-6 background">
@@ -90,21 +78,5 @@
     </div>
   </div>
 
-  <div class="modal" tabindex="-1" role="dialog" id="thank-you-modal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Email Notification</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="response"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-close-btn">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+  {{> modal/modal-block}}
+

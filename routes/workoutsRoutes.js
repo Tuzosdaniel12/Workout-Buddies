@@ -10,7 +10,6 @@ router.post("/api/workouts", (req, res) => {
     description: req.body.description,
     UserId: req.user.id
   }).then(async ({ id }) => {
-    console.log("HERE AMIGO", id);
     await db.SavedWorkouts.create({
       UserId: req.user.id,
       WorkoutId: id
@@ -48,6 +47,31 @@ router.put("api/workouts/:id", (req, res) => {
     { where: { id: req.params.id } }
   ).then(results => {
     res.json(results);
+  });
+});
+
+router.put("/api/workouts/view/:id", (req, res) => {
+  console.log(req.user);
+
+  db.Workouts.update(
+    {
+      publicBoolean: req.body.bool
+    },
+    { where: { id: req.params.id } }
+  ).then(results => {
+    console.log(results);
+    if (req.body.current) {
+      db.Workouts.update(
+        {
+          publicBoolean: 0
+        },
+        { where: { id: req.body.current } }
+      ).then(() => {
+        res.json({ success: "Change what you are viewing" });
+      });
+    } else {
+      return res.json({ success: "Change what you are viewing" });
+    }
   });
 });
 

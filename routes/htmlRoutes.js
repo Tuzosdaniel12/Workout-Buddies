@@ -22,6 +22,9 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/create", (req, res) => {
+  if (!req.user) {
+    res.redirect("/");
+  }
   res.render("createOrUpdate", {
     action: "Create",
     title: "Title",
@@ -29,7 +32,10 @@ router.get("/create", (req, res) => {
   });
 });
 
-router.get("/update/:id", (req, res) => {
+router.get("/update", (req, res) => {
+  if (!req.user) {
+    res.redirect("/");
+  }
   // const viewOne = await db.Workouts.findOne({
   //   where: { id: req.params.id }
   // });
@@ -55,12 +61,20 @@ router.get("/progress", (req, res) => {
 });
 
 router.get("/updatestats", (req, res) => {
-  res.render("updatestats");
+  if (!req.user) {
+    res.redirect("/");
+  }
+  res.render("updatestats", {
+    action: "update stats",
+    weight: req.user.weight,
+    age: req.user.age
+  });
 });
 
 router.get("/allworkouts", async (req, res) => {
   const workouts = await db.Workouts.findAll({
-    include: [{ model: db.User }]
+    include: [{ model: db.User }],
+    order: [["createdAt", "DESC"]]
   }).catch(err => {
     res.json({ error: err });
   });
@@ -70,6 +84,7 @@ router.get("/allworkouts", async (req, res) => {
       title: workout.dataValues.title,
       category: workout.dataValues.category,
       name: workout.dataValues.User.name,
+      bool: workout.dataValues.publicBoolean,
       description: workout.dataValues.description,
       author: workout.dataValues.User.name
     };

@@ -47,6 +47,12 @@ body{
     display:none;
     font-family: 'Permanent Marker', cursive; 
  }
+
+ .liked-workout{
+    background-color: aqua;
+    border-color: blue;
+ }
+
  
 @media (min-width: 469px) {
     .logo{

@@ -77,13 +77,20 @@ function handleBtnAction(e) {
   console.log($(this).data("action"));
   switch (action) {
   case "view" :
-    console.log("here");
+  case "view-workout" :
+    let route = "";
+    if(action === "view-workout"){
+      route = "workouts/view";
+    }else{
+      route = "SavedWorkouts";
+    }
+
     if(!($(this).data("bool"))){
       data.bool = 1;
       console.log("hit", data.bool);
     }
     data.current = $("#current-workout").data("id");
-    $.ajax("/api/SavedWorkouts/" + data.id, {
+    $.ajax("/api/"+route+"/" + data.id, {
       type: "PUT",
       data: data
     }).then(() => {
@@ -95,7 +102,7 @@ function handleBtnAction(e) {
     break;
   case "update" :
     //data.id
-    window.location.replace("/update/" + data.id);
+    window.location.replace("/update");
     break;
   case "delete" :
     $.ajax("/api/SavedWorkouts/" + data.id, {
@@ -107,8 +114,8 @@ function handleBtnAction(e) {
     });
     break;
   case "like" :
-    break;
-  case "view-workout" :
+    console.log("focus");
+    $(this).addClass("liked-workout");
     break;
   case "save" :
     $.ajax("/api/SavedWorkouts", {

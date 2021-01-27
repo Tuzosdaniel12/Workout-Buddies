@@ -36,10 +36,25 @@ $(document).ready(() => {
         parseInt($("#inches option:selected").val())
     };
     if (userData.password !== userData.repassword) {
+      $("#thank-you-modal").show();
+      $("#notification").text("Error");
+      $("#response").text("Passord Didn't Match");
       return;
     }
 
-    if (!userData.email || !userData.password) {
+    if (
+      !userData.email ||
+      !userData.password ||
+      !userData.name ||
+      !userData.gender ||
+      !userData.weight ||
+      !userData.age ||
+      !userData.height ||
+      !userData.repassword
+    ) {
+      $("#thank-you-modal").show();
+      $("#notification").text("Error");
+      $("#response").text("Make sure All fields are filled in!!!");
       return;
     }
     console.log(userData);
@@ -56,11 +71,12 @@ $(document).ready(() => {
       .then(response => {
         console.log(response);
         $("#thank-you-modal").show();
+        $("#notification").text("Email Notification");
         $("#response").text(response.message);
 
         setTimeout(() => {
           window.location.replace("/activate");
-        }, 8000);
+        }, 4000);
 
         // If there's an error, handle it by throwing up a bootstrap alert
       })

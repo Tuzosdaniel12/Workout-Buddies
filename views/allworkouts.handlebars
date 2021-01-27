@@ -4,7 +4,7 @@
           <div class="custom-flex">
             <img class="logo" src="./assets/images/signup.png">
             <div>
-              <h1 class="display-4 fw-bolder custom-title text-dark">More WorkOuts</h1>
+              <h1 class="display-4 custom-title">More WorkOuts</h1>
               <small class="lead fw-bold">See all workouts!!</small>
             </div>
           </div>
@@ -45,7 +45,7 @@
               <td>{{name}}</td>
               <td>{{category}}</td>
               <td>
-                  <button type="button" class="btn btn-warning btn-sm" data-action="view" data-bool="{{bool}}" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                  <button type="button" class="btn btn-warning btn-sm" data-action="view-workout" data-bool="{{bool}}" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
                   <button type="button" class="btn btn-success btn-sm" data-action="save" data-id="{{id}}"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button> 
               </td>
             </tr>
@@ -59,17 +59,15 @@
     <div class="card-header">
       <h4>View WorkOut</h4>
     </div>
-    <div class="card-body">
-      <div class="card-body">
-          {{#each workouts}}
-            {{#if bool}}
-              <h3>{{title}}</h3>
-              <p>{{category}}</p>
-              <p>{{author}}</p>
-              <p class="card-text">{{description}}</p>
-            {{/if}}
-          {{/each}}
-      </div>
+        <div class="card-body">
+      {{#each workouts}}
+        {{#if bool}}
+          <h3 id="current-workout" data-id={{id}}>{{title}}</h3>
+          <p>{{category}}</p>
+          <p>{{author}}</p>
+          <p class="card-text">{{description}}</p>
+        {{/if}}
+      {{/each}}
     </div>
   </div>
 </div>
