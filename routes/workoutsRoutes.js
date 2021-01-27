@@ -3,14 +3,23 @@ const router = require("express").Router();
 //routes by function/page controllers due query
 //create workout userID:req.user.id
 router.post("/api/workouts", (req, res) => {
-  console.log("in workouts route test");
+  console.log("req.user.id", req.user.id);
   db.Workouts.create({
     title: req.body.title,
     category: req.body.category,
     description: req.body.description,
     UserId: req.user.id
-  }).then(results => {
-    res.json(results);
+  }).then(async ({ id }) => {
+    console.log("HERE AMIGO", id);
+    await db.SavedWorkouts.create({
+      UserId: req.user.id,
+      WorkoutId: id
+    }).catch(() => {
+      return res.json({
+        error: "Something went wrong make sure to fill out all fields"
+      });
+    });
+    return res.json({ success: "We added a new workout Buddie!!" });
   });
 });
 //read for all workouts
