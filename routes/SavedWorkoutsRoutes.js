@@ -12,7 +12,7 @@ router.get("/api/SavedWorkouts/:id", (req, res) => {
 });
 
 router.delete("/api/SavedWorkouts/:id", (req, res) => {
-  db.workouts.destroy({ where: { id: req.params.id } }).then(results => {
+  db.SavedWorkouts.destroy({ where: { id: req.params.id } }).then(results => {
     res.json(results);
   });
 });
