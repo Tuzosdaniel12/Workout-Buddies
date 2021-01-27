@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
@@ -6,6 +7,7 @@ $(document).ready(() => {
   });
 });
 
+const actionBtn = $("#action-buttons");
 // 1). Create AJAX DELETE and SAVE REQUEST ?
 
 $(".delete-workout").on("click", function(event) {
@@ -52,3 +54,36 @@ $(".dropdown-toggle").on("click", e => {
   e.preventDefault();
   $(".dropdown-menu, #overlay").toggleClass("show");
 });
+
+function handleBtnActiov(e) {
+  e.preventDefault();
+  const data = { id: $(this).data("id") };
+  const action = $(this).data("action");
+  switch (action) {
+  case "view" :
+    data.bool = $(this).data("bool");
+    data.current = $("#current-workout").data("id");
+    break;
+  case "update" :
+    //data.id
+    window.location.replace("/update/" + data.id);
+    break;
+  case "delete" :
+    $.ajax("/api/SavedWorkouts/" + data.id, {
+      type: "DELETE"
+    }).then(() => {
+      console.log("deleted workout", data.id);
+  
+      location.reload();
+    });
+    break;
+  case "like" :
+    break;
+  case "view-workout" :
+    break;
+  case "save" :
+    break;
+  }
+}
+
+actionBtn.on("click", "[data-id]", handleBtnActiov);
