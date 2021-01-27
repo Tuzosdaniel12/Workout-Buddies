@@ -55,7 +55,7 @@ $(".dropdown-toggle").on("click", e => {
   $(".dropdown-menu, #overlay").toggleClass("show");
 });
 
-function handleBtnActiov(e) {
+function handleBtnAction(e) {
   e.preventDefault();
   const data = { id: $(this).data("id") };
   const action = $(this).data("action");
@@ -82,8 +82,15 @@ function handleBtnActiov(e) {
   case "view-workout" :
     break;
   case "save" :
+    $.ajax("/api/SavedWorkouts/" + data.id, {
+      type: "PUT"
+    }).then(() => {
+      console.log("updated workout", data.id);
+  
+      location.reload();
+    });
     break;
   }
 }
 
-actionBtn.on("click", "[data-id]", handleBtnActiov);
+actionBtn.on("click", "[data-id]", handleBtnAction);
