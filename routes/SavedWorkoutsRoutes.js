@@ -12,8 +12,8 @@ router.get("/api/SavedWorkouts/:id", (req, res) => {
 });
 
 router.put("/api/SavedWorkouts/:id", (req, res) => {
-  console.log(req.body);
-  console.log(req.params);
+  console.log(req.user);
+
   db.SavedWorkouts.update(
     {
       publicBoolean: req.body.bool

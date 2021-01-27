@@ -87,11 +87,18 @@ router.get("/members", isAuthenticated, async (req, res) => {
   }
   const results = await db.SavedWorkouts.findAll({
     where: { UserId: req.user.id },
+    order: [["createdAt", "DESC"]],
     include: [
       { model: db.Workouts, include: [{ model: db.User }] },
       { model: db.User }
     ]
   });
+
+  const bmiRes = await db.BMI.findAll({
+    where: { UserId: req.user.id },
+    order: [["createdAt", "DESC"]]
+  });
+  const bmi = bmiRes[0].dataValues.bmi;
 
   const workouts = results.map(workout => {
     return {
@@ -107,7 +114,8 @@ router.get("/members", isAuthenticated, async (req, res) => {
 
   res.render("members", {
     workouts: workouts,
-    name: results[0].dataValues.User.name
+    name: req.user.name,
+    bmi: bmi
   });
 });
 
