@@ -22,7 +22,6 @@ body{
 .custom-title{
     align-self: end;
     justify-self: end;
-    margin-top: 5%;
     margin-bottom:0;
     color: #333333;
 }
@@ -41,7 +40,14 @@ body{
 }
 #custom-height{
   height:350px;
+  overflow-y: scroll;
 }
+
+.sm-view{
+    display:none;
+    font-family: 'Permanent Marker', cursive; 
+ }
+ 
 @media (min-width: 469px) {
     .logo{
         width: 10%;
@@ -50,11 +56,15 @@ body{
     .custom-title{
         margin-top: 4.5%;
     }
+
   }
   @media (min-width: 600px) {
     body {
         background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     }
+    .sm-view{
+        display:inline-block;
+     }
   }
 @media (min-width: 764px) {
   #custom-height{
@@ -64,8 +74,8 @@ body{
         margin-top: 4%;
     }
   }
-  @media (min-width: 1200px) {
+  /* @media (min-width: 1200px) {
     .custom-title{
         margin-top: 12%;
     }
-  }
+  } */

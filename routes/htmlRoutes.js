@@ -29,17 +29,21 @@ router.get("/create", (req, res) => {
   });
 });
 
-router.get("/update/workout/:id", async (req, res) => {
-  const viewOne = await db.Workouts.findOne({
-    where: { id: req.params.id }
+router.get("/update/:id", (req, res) => {
+  // const viewOne = await db.Workouts.findOne({
+  //   where: { id: req.params.id }
+  // });
+
+  // const renderData = {
+  //   viewOne: viewOne,
+  //   action: "Update"
+  // };
+
+  res.render("createOrUpdate", {
+    action: "Update",
+    title: "Title",
+    description: "Description"
   });
-
-  const renderData = {
-    viewOne: viewOne,
-    action: "Update"
-  };
-
-  res.render("createOrUpdate", renderData);
 });
 
 router.get("/activate", (req, res) => {
@@ -54,8 +58,26 @@ router.get("/updatestats", (req, res) => {
   res.render("updatestats");
 });
 
-router.get("/allworkouts", (req, res) => {
-  res.render("allworkouts");
+router.get("/allworkouts", async (req, res) => {
+  const workouts = await db.Workouts.findAll({
+    include: [{ model: db.User }]
+  }).catch(err => {
+    res.json({ error: err });
+  });
+  const dataRender = workouts.map(workout => {
+    return {
+      id: workout.dataValues.id,
+      title: workout.dataValues.title,
+      category: workout.dataValues.category,
+      name: workout.dataValues.User.name,
+      description: workout.dataValues.description,
+      author: workout.dataValues.User.name
+    };
+  });
+
+  res.render("allworkouts", {
+    workouts: dataRender
+  });
 });
 // Here we've add our isAuthenticated middleware to this route.
 // If a user who is not logged in tries to access this route they will be redirected to the signup page
@@ -63,25 +85,30 @@ router.get("/members", isAuthenticated, async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
+  const results = await db.SavedWorkouts.findAll({
+    where: { UserId: req.user.id },
+    include: [
+      { model: db.Workouts, include: [{ model: db.User }] },
+      { model: db.User }
+    ]
+  });
+  console.log(results);
+  const workouts = results.map(workout => {
+    return {
+      id: workout.dataValues.id,
+      bool: workout.dataValues.publicBoolean,
+      title: workout.dataValues.Workout.title,
+      category: workout.dataValues.Workout.category,
+      name: workout.dataValues.User.name,
+      description: workout.dataValues.Workout.description,
+      author: workout.dataValues.Workout.User.name
+    };
+  });
 
-  // const viewOne = await db.SavedWorkouts.findOne({
-  //   where: { publicBoolean: 1 }
-  // });
-
-  //const results = await db.SavedWorkouts.findAll({
-  //   where: { UserId: req.user.id },
-  //   include: [{ model: db.Workouts }]
-  // });
-  // const renderData = {
-  //   bmi: req.user.bmi,
-  //   workouts: results,
-  //   title: viewOne[0].dataValues.title,
-  //   category: viewOne[0].dataValues.category,
-  //   name: viewOne[0].dataValues.name,
-  //   description: viewOne[0].dataValues.description
-  // };
-
-  res.render("members");
+  res.render("members", {
+    workouts: workouts,
+    name: results[0].dataValues.User.name
+  });
 });
 
 module.exports = router;

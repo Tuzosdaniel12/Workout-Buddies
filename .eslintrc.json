@@ -35,6 +35,7 @@
     "quotes": ["error", "double",{ "allowTemplateLiterals": true }],
     "semi": ["error", "always"],
     "vars-on-top": "error",
-    "yoda": "error"
+    "yoda": "error",
+    "switch-colon-spacing": ["error", {"after": false, "before": true }]
   }
 }
