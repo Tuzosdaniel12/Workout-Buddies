@@ -1,10 +1,6 @@
-// const domain = require("./options.js")("domain");
-// const mailKey = require("./options.js")("mailKey");
-
 class Mail {
   constructor() {
     this.nodemailer = require("nodemailer");
-    this.mailgun = require("./options.js")("mailgun");
     this.mailPass = require("./options.js")("mailPass");
   }
   html(key, action) {
@@ -30,7 +26,7 @@ class Mail {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: this.mailgun, // generated ethereal user
+        user: "postmaster@workout-buddies.site", // generated ethereal user
         pass: this.mailPass // generated ethereal password
       },
       tls: {

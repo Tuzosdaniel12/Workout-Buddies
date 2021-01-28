@@ -58,20 +58,13 @@ body{
     background-color:rgba(173, 165, 165, 0.8);
  }
 
- .footer {
-    color: #333333;
-    padding: 50px;
-    clear: both;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
-}
-
 .footer-mod{
-    padding-top: 15%;
-      width: 100%;
-      color: #333333;
-      font-weight: bold;
-      font-family: 'Permanent Marker', cursive;  
+    text-align: center;
+    color: #333333;
+    width: 100%;
+    height: 100px;
+    margin-top: auto;
+    padding: 3em;
 }
 
 .footer-mod a {
@@ -96,9 +89,7 @@ body{
     }
   }
   @media (min-width: 600px) {
-    .footer-mod{
-        padding-top: 15%;
-    }
+
     body {
         background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     }
@@ -110,9 +101,7 @@ body{
      }
   }
 @media (min-width: 764px) {
-    .footer-mod{
-        padding-top: 3%;
-    }
+
   #custom-height{
     height:300px;
   }

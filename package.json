@@ -1,11 +1,12 @@
 {
-  "name": "1-Passport-Example",
+  "name": "Workout-Buddies",
   "version": "1.0.0",
-  "description": "",
+  "description": "Creat, Update,Delete,Read Workouts",
   "main": "server.js",
   "scripts": {
+    "envsetup": "node envsetup",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "test": "npm run lint",
-    "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
     "watch": "nodemon server.js"
