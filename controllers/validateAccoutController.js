@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
   });
 
   if (decodedToken === undefined) {
+    console.log("here inside ", decodedToken);
     return res.redirect(400, "/");
   }
   const { email } = decodedToken;
@@ -27,12 +28,13 @@ module.exports = async (req, res) => {
       emailBoolean: 1
     },
     { where: { email: email } }
-  ).catch(err => {
+  ).catch(() => {
+    console.log("here inside ");
     res
       .status(401)
-      .json(err)
+      .json({ error: "failed" })
       .res.redirect("/");
   });
-
-  res.redirect("/");
+  console.log("here");
+  return res.json({ success: "We activated your account" });
 };

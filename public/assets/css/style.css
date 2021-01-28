@@ -96,4 +96,27 @@ body{
     .custom-title{
         margin-top: 12%;
     }
-  } */
+  }
+
+  /* FOOTER */
+
+  .footer {
+    color: #333333;
+    padding: 50px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+.footer-mod{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: #333333;
+      font-weight: bold;
+      font-family: 'Permanent Marker', cursive;  
+}
+
+.footer-mod a {
+     color: #333333;
+}

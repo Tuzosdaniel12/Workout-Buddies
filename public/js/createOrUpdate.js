@@ -12,8 +12,11 @@ $(document).ready(() => {
       .val()
       .trim();
     if (event.target.getAttribute("data-action") === "Update") {
+<<<<<<< HEAD
       console.log("updating");
       console.log(event.target.getAttribute("data-action"));
+=======
+>>>>>>> e4c83ea22b560f8c0b8ab65834ee466d7312283c
       updateWO(
         event.target.getAttribute("data-id"),
         titleInput,
