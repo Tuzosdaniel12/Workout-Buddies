@@ -2,12 +2,13 @@ class Mail {
   constructor() {
     this.nodemailer = require("nodemailer");
     this.mailPass = require("./options.js")("mailPass");
+    this.siteUrl = require("./options.js")("siteUrl");
   }
   html(key, action) {
     return `<h2>Welcome to Working Out Buddies</h2>
     <br>
           <h3>${action} Code:   ${key}</h3><br>
-          <a href="https://workout-buddies.herokuapp.com/${action}">Press link to ${action}</a>
+          <a href="${this.siteUrl}${action}">Press link to ${action}</a>
 
          <p>Expires in ten minutes</p>`;
   }

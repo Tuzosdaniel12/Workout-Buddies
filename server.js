@@ -1,6 +1,5 @@
 // Requiring necessary npm packages
 const express = require("express");
-const flash = require("express-flash");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 // Requiring passport as we've configured it
@@ -24,7 +23,6 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // We need to use sessions to keep track of our user's login status
-app.use(flash());
 app.use(session({ secret: secret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -33,6 +31,7 @@ app.use(passport.session());
 // const authRoutes = require("./routes/authRoutes");
 // const htmlRoutes = require("./routes/htmlRoutes");
 // const activation = require("./routes/activateAccountRoute");
+console.log(process.env.NODE_ENV);
 
 app.use(require("./routes"));
 
