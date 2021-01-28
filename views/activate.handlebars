@@ -9,7 +9,7 @@
             {{#if bool}}
             <input type="code" class="form-control" id="code-input" name="code" placeholder="Activation Code">
             {{else}}
-            <input type="email" class="form-control" id="email-input" name="email" placeholder="Send Email">
+            <input type="email" class="form-control" id="email-input" data-target="{{target}}" name="email" placeholder="Send Email">
             {{/if}}
           </div>
           <button type="submit" value="submit" id="{{action}}" class="btn btn-default">{{action}}</button>

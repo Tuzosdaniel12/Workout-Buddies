@@ -26,10 +26,9 @@ module.exports = async (req, res) => {
 
   const mail = new Mail();
 
-  if (mail.sendMail(req.body.email, key, "reset-password")) {
+  if (mail.sendMail(req.body.email, key, req.body.action)) {
     return res.json({
-      message:
-        "Email has been sent, kindly go get the authorization code to update the password"
+      message: `Email has been sent, kindly go get the authorization code to ${req.body.action}`
     });
   }
   return res.json({

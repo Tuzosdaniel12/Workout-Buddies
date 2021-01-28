@@ -7,7 +7,8 @@ const handleForgotPass = async e => {
   const email = {
     email: $("#email-input")
       .val()
-      .trim()
+      .trim(),
+    action: $("#email-input").data("target")
   };
 
   const result = await sendEmail(email).catch(err => {
@@ -21,14 +22,18 @@ const handleForgotPass = async e => {
   $("#response").text(result.message);
 
   setTimeout(() => {
-    window.location.replace("/reset-password");
+    if (email.action === "reset-password") {
+      window.location.replace("/reset-password");
+    } else {
+      window.location.replace("/activate");
+    }
   }, 4000);
 };
 
 const sendEmail = email => {
   console.log(email);
   return $.ajax({
-    url: "/api/forgot-password",
+    url: "/api/send-email",
     data: email,
     method: "POST"
   });
