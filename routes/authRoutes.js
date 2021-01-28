@@ -24,7 +24,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // otherwise send back an error
 router.post("/api/signup", async (req, res) => {
   const { name, email, password, height, weight, age, gender } = req.body;
-  console.log(req.body);
+
   const dbUser = await db.User.findAll({
     where: {
       email: email
@@ -32,8 +32,7 @@ router.post("/api/signup", async (req, res) => {
   });
 
   if (dbUser.length >= 1) {
-    res.status(400).json({ error: "User with email already exists." });
-    res.redirect("/");
+    res.json({ message: "User with email already exists." });
   }
   const bmiCal = new BMI();
 
@@ -49,14 +48,16 @@ router.post("/api/signup", async (req, res) => {
     weight: weight,
     age: parseInt(age),
     gender: gender
-  }).catch(err => {
-    return res.status(401).json(err);
+  }).catch(() => {
+    return res.json({ message: "something went wrong" });
   });
 
   const userId = await db.User.findAll({
     where: {
       email: email
     }
+  }).catch(() => {
+    return res.json({ message: "something went wrong" });
   });
 
   await db.BMI.create({
@@ -73,8 +74,10 @@ router.post("/api/signup", async (req, res) => {
   await db.Tokens.create({
     token: await Tokens.sign(email),
     key: key
-  }).catch(err => {
-    console.error(err);
+  }).catch(() => {
+    return res.json({
+      message: "error"
+    });
   });
 
   const mail = new Mail();
@@ -86,7 +89,7 @@ router.post("/api/signup", async (req, res) => {
     });
   }
   return res.json({
-    error: "error"
+    message: "error"
   });
 });
 

@@ -3,11 +3,7 @@ const emailBtn = $("#email");
 
 const handleForgotPass = async e => {
   e.preventDefault();
-  console.log(
-    $("#email-input")
-      .val()
-      .trim()
-  );
+
   const email = {
     email: $("#email-input")
       .val()
@@ -19,17 +15,9 @@ const handleForgotPass = async e => {
     $("#notification").text("Errors");
     console.log(err, "error");
   });
-  if (result.error) {
-    $("#thank-you-modal").show();
-    $("#notification").text("Invalid Account");
-    $("#response").text(result.error);
 
-    setTimeout(() => {
-      window.location.replace("/");
-    }, 4000);
-  }
   $("#thank-you-modal").show();
-  $("#notification").text("Email Notification");
+  $("#notification").text("Reset Email");
   $("#response").text(result.message);
 
   setTimeout(() => {
@@ -38,10 +26,11 @@ const handleForgotPass = async e => {
 };
 
 const sendEmail = email => {
+  console.log(email);
   return $.ajax({
     url: "/api/forgot-password",
     data: email,
-    method: "GET"
+    method: "POST"
   });
 };
 emailForm.on("submit", handleForgotPass);

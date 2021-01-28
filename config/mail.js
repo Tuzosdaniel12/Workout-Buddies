@@ -9,16 +9,17 @@ class Mail {
   }
   html(key, action) {
     return `<h2>Welcome to Working Out Buddies</h2>
-          <h3>${action} Code:${key}</h3>
-          <a href="http://localhost:/3000/${action}">PRESS LINK TO ${action} ACCOUNT</a>
+    <br>
+          <h3>${action} Code:   ${key}</h3><br>
+          <a href="https://workout-buddies.herokuapp.com/${action}">Press link to ${action}</a>
 
-         <p>expires in ten minutes</p>`;
+         <p>Expires in ten minutes</p>`;
   }
   mailOptions(email, key, action) {
     return {
       from: "noreply@workingoutbuddies.com",
       to: email,
-      subject: "Account Activation Link",
+      subject: "Account " + action + " Link",
       text: `Welcome to Workout Buddies`,
       html: this.html(key, action)
     };

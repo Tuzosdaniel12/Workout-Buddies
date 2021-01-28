@@ -8,7 +8,7 @@ $(document).ready(() => {
   // When the signup button is clicked, we validate the email and password are not blank
   const handleUserData = event => {
     event.preventDefault();
-    console.log("hit");
+
     const userData = {
       name: $("#name-input")
         .val()
@@ -69,13 +69,12 @@ $(document).ready(() => {
   function signUpUser(userData) {
     $.post("/api/signup", userData)
       .then(response => {
-        console.log(response);
         $("#thank-you-modal").show();
         $("#notification").text("Email Notification");
         $("#response").text(response.message);
 
         setTimeout(() => {
-          window.location.replace("/activate");
+          window.location.replace("/");
         }, 4000);
 
         // If there's an error, handle it by throwing up a bootstrap alert

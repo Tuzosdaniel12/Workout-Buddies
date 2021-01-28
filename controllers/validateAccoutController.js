@@ -6,10 +6,10 @@ module.exports = async (req, res) => {
   const tkn = await Tokens.findOne({
     where: { key: req.body.key }
   }).catch(() => {
-    return res.json({ error: "No account created yet" });
+    return res.json({ message: "No account created yet" });
   });
   if (!tkn) {
-    return res.json({ error: "No account created yet" });
+    return res.json({ message: "No account created yet" });
   }
   const { token } = tkn;
   const Jwt = new JWT();
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   if (decodedToken === undefined) {
     console.log("here inside ", decodedToken);
-    return res.redirect(400, "/");
+    return res.json({ message: "Expired code" });
   }
   const { email } = decodedToken;
 
@@ -36,5 +36,5 @@ module.exports = async (req, res) => {
       .res.redirect("/");
   });
   console.log("here");
-  return res.json({ success: "We activated your account" });
+  return res.json({ message: "We activated your account" });
 };
