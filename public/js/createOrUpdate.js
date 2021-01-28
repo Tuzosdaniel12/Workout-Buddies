@@ -12,7 +12,12 @@ $(document).ready(() => {
       .val()
       .trim();
     if (event.target.getAttribute("data-id")) {
-      updateWO(event.target.getAttribute("data-id"));
+      updateWO(
+        event.target.getAttribute("data-id"),
+        titleInput,
+        categoryInput,
+        descriptionInput
+      );
     } else {
       console.log("creating");
       createWO(titleInput, categoryInput, descriptionInput);
