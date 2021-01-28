@@ -25,11 +25,38 @@ progress and stats to the public view. This will help create a community built o
 
 # Technologies Used
 
+* Node.js
+* Bootstrap
+* Pexels
+* Splash
+* Rapid API
+* Mailgun
+* Heroku
+  
+
+<br>
+
 # Usage
+
+
+
+
+
+
+
+<br>
 
 # Finished Product (Demo)
 
+![image](https://user-images.githubusercontent.com/70370805/106086901-d43dff00-60d7-11eb-81ca-e8aa9929ff6f.png)
+
+
+
+<br>
+
 # Credits/Collaborators
+
+Contact us below for any questions:
 
 Daniel Soledad - [Tuzosdaniel12](https://github.com/Tuzosdaniel12)
 
@@ -40,9 +67,7 @@ Francine Babauta - [fbabauta](https://github.com/fbabauta)
 Stanislava Medigovik - [smedigo](https://github.com/smedigo)
 
 
-<br>
 
-# Questions or Comments
 
 
 
