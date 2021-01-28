@@ -32,7 +32,7 @@ router.post("/api/signup", async (req, res) => {
   });
 
   if (dbUser.length >= 1) {
-    res.status(400).json("User with email already exists.");
+    res.status(400).json({ error: "User with email already exists." });
     res.redirect("/");
   }
   const bmiCal = new BMI();

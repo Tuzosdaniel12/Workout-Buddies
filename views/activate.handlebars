@@ -3,13 +3,16 @@
   <div class="container">
     <div class="row row justify-content-md-center custom-mx">
       <div class="col-md-6 background">
-        <h2>Activate Account</h2>
-        <form class="activate" >
+        <h2>{{action}} Account</h2>
+        <form class="{{action}}" >
           <div class="form-group">
+            {{#if bool}}
             <input type="code" class="form-control" id="code-input" name="code" placeholder="Activation Code">
+            {{else}}
+            <input type="email" class="form-control" id="email-input" name="email" placeholder="Send Email">
+            {{/if}}
           </div>
-          <p>{{message}}</p>
-          <button type="submit" value="submit" class="btn btn-default">Activate</button>
+          <button type="submit" value="submit" id="{{action}}" class="btn btn-default">{{action}}</button>
         </form>
         <br />
         <p>Or sign up <a href="/signup">HERE</a>.</p>
