@@ -21,6 +21,11 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+router.get("/reset-password", (req, res) => {
+  // If the user already has an account send them to the members page
+  res.render("resetpass");
+});
+
 router.get("/create", (req, res) => {
   if (!req.user) {
     res.redirect("/");
@@ -49,12 +54,20 @@ router.get("/update/:id", async (req, res) => {
   });
 });
 
-router.get("/reset-password", (req, res) => {
-  res.render("index");
+router.get("/forgot-password", (req, res) => {
+  res.render("activate", {
+    action: "email",
+    bool: false,
+    target: "reset-password"
+  });
 });
 
-router.get("/forgot-password", (req, res) => {
-  res.render("activate", { action: "email", bool: false });
+router.get("/resend-activation", (req, res) => {
+  res.render("activate", {
+    action: "email",
+    bool: false,
+    target: "resend-activation"
+  });
 });
 
 router.get("/activate", (req, res) => {

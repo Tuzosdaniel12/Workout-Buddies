@@ -57,7 +57,23 @@ body{
  .custom-background{
     background-color:rgba(173, 165, 165, 0.8);
  }
+
+.footer-mod{
+    text-align: center;
+    color: #333333;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 100%;
+    padding: 3em;
+}
+
+.footer-mod a {
+     color: #333333;
+}
+
 @media (min-width: 469px) {
+
     .logo{
         width: 10%;
         height: 20%;
@@ -74,6 +90,7 @@ body{
     }
   }
   @media (min-width: 600px) {
+
     body {
         background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     }
@@ -85,6 +102,7 @@ body{
      }
   }
 @media (min-width: 764px) {
+
   #custom-height{
     height:300px;
   }
@@ -100,22 +118,3 @@ body{
 
   /* FOOTER */
 
-  .footer {
-    color: #333333;
-    padding: 50px;
-    clear: both;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
-}
-
-.footer-mod{
-    padding-top: 15%;
-      width: 100%;
-      color: #333333;
-      font-weight: bold;
-      font-family: 'Permanent Marker', cursive;  
-}
-
-.footer-mod a {
-     color: #333333;
-}

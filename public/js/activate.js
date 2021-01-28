@@ -14,15 +14,10 @@ const handleActivation = async e => {
     $("#notification").text("Errors");
     console.log(err, "error");
   });
-  console.log(results);
+
   $("#thank-you-modal").show();
   $("#notification").text("Activated");
-
-  if (results.error !== undefined || results.error !== null) {
-    $("#response").text(results.error);
-  } else {
-    $("#response").text(results.success);
-  }
+  $("#response").text(results.message);
 
   setTimeout(() => {
     window.location.replace("/");
@@ -33,7 +28,7 @@ const activate = activation => {
   return $.ajax({
     url: "/api/activate",
     data: activation,
-    method: "PUT"
+    method: "POST"
   });
 };
 activateForm.on("submit", handleActivation);

@@ -15,7 +15,6 @@ router.post("/api/bmi", (req, res) => {
     res.json(results);
   });
 
-
   // db.User.create({
   //   name: name,
   //   email: email,

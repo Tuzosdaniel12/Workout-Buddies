@@ -3,14 +3,14 @@ const CreateTokens = require("../util/CreateTokens");
 const Mail = require("../config/mail.js");
 
 module.exports = async (req, res) => {
-  console.log(req.body);
+  console.log("here", req.body);
   const dbUser = await db.User.findOne({
     where: { email: req.body.email }
   }).catch(() => {
-    return res.json({ error: "No account created yet" });
+    return res.json({ message: "No account created yet" });
   });
   if (!dbUser) {
-    return res.json({ error: "No account created yet" });
+    return res.json({ message: "No account created yet" });
   }
 
   const Tokens = new CreateTokens();
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
   const key = await Tokens.key();
 
   await db.Tokens.create({
-    token: await Tokens.sign(email),
+    token: await Tokens.sign(req.body.email),
     key: key
   }).catch(err => {
     console.error(err);
@@ -26,13 +26,12 @@ module.exports = async (req, res) => {
 
   const mail = new Mail();
 
-  if (mail.sendMail(email, key, "reset-password")) {
+  if (mail.sendMail(req.body.email, key, req.body.action)) {
     return res.json({
-      message:
-        "Email has been sent, kindly go get the authorization code to update the password"
+      message: `Email has been sent, kindly go get the authorization code to ${req.body.action}`
     });
   }
   return res.json({
-    error: "error"
+    message: "error"
   });
 };

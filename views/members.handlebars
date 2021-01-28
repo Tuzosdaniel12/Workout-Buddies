@@ -52,9 +52,10 @@
     <div class="card-body">
       {{#each workouts}}
         {{#if bool}}
-          <h3 id="current-workout" data-id={{id}}>{{title}}</h3>
-          <p>{{category}}</p>
-          <p>{{author}}</p>
+          <h3 id="current-workout" data-id={{id}}>Tilte: {{title}}</h3>
+          <p><span class="text-dark">Category: </span>{{category}}</p>
+          <p><span class="text-dark">Author: </span>{{author}}</p>
+          <p class="mb-0 text-dark">Description:</p>
           <p class="card-text">{{description}}</p>
         {{/if}}
       {{/each}}
