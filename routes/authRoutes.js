@@ -36,10 +36,13 @@ router.post("/api/signup", async (req, res) => {
   }
   const bmiCal = new BMI();
 
-  let bmi = await bmiCal.getRequest(age, weight * 0.453592, height * 2.54);
+  let bmi = await bmiCal
+    .getRequest(age, weight * 0.453592, height * 2.54)
+    .catch(() => {
+      res.json({ message: "Something Went wrongcome back later" });
+    });
   bmi = Math.floor(bmi);
 
-  console.log("HIT", bmi);
   await db.User.create({
     name: name,
     email: email,
