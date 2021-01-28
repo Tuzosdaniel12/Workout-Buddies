@@ -45,7 +45,7 @@ function updateUpUser(userData) {
       $("#response").text(response.message);
 
       setTimeout(() => {
-        window.location.replace("/activate");
+        window.location.replace("/progress");
       }, 4000);
 
       // If there's an error, handle it by throwing up a bootstrap alert

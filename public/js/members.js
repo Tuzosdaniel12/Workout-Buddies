@@ -7,20 +7,25 @@ $(document).ready(() => {
   });
 
   
+
+  const checkBmi = () =>{
+    const value = parseInt($("#bmiNumber").text());
+
+    if(value <= 18){
+      $("#bmi").css("background-color", "DeepSkyBlue");
+    }else if(value >= 19 || value <= 25){
+      $("#bmi").css("background-color", "LightGreen");
+    }else if(value >= 26 || value <= 30){
+      $("#bmi").css("background-color", "orange");
+    }else{
+      $("#bmi").css("background-color", "red");
+    }
+  };
+
+  checkBmi();
 });
 
-const checkBmi = () =>{
-  const value = parseInt($("#bmi").val());
-  if(value <= 18){
-    $("#bmi").css("background-color", "DeepSkyBlue");
-  }else if(value >= 19 || value <= 25){
-    $("#bmi").css("background-color", "LightGreen");
-  }else if(value >= 26 || value <= 30){
-    $("#bmi").css("background-color", "orange");
-  }else{
-    $("#bmi").css("background-color", "red");
-  }
-};
+
 
 const actionBtn = $("#action-buttons");
 // 1). Create AJAX DELETE and SAVE REQUEST ?
@@ -140,6 +145,6 @@ const getDataidToUpdateUser = ()=>{
   }
 };
 
-checkBmi();
+
 getDataidToUpdateUser();
 actionBtn.on("click", "[data-id]", handleBtnAction);
