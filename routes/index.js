@@ -4,5 +4,6 @@ module.exports = [
   require("./bmiRoutes"),
   require("./workoutsRoutes.js"),
   require("./activateAccountRoute.js"),
+  require("./forgotEmailroute"),
   require("./htmlRoutes.js")
 ];

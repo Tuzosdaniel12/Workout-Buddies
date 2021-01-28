@@ -7,4 +7,13 @@ router.get("/api/bmi", (req, res) => {
   });
 });
 
+router.post("/api/bmi", (req, res) => {
+  db.BMI.create({
+    bmi: req.body.bmi,
+    UserId: req.user.id
+  }).then(results => {
+    res.json(results);
+  });
+});
+
 module.exports = router;

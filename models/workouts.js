@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
     category: {
       type: DataTypes.STRING,
       defaultValue: "Body"
+    },
+    publicBoolean: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
 

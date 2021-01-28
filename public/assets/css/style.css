@@ -22,7 +22,6 @@ body{
 .custom-title{
     align-self: end;
     justify-self: end;
-    margin-top: 5%;
     margin-bottom:0;
     color: #333333;
 }
@@ -41,7 +40,23 @@ body{
 }
 #custom-height{
   height:350px;
+  overflow-y: scroll;
 }
+
+.sm-view{
+    display:none;
+    font-family: 'Permanent Marker', cursive; 
+ }
+
+ .liked-workout{
+     background-color: #1187d6;
+     -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 0px 0px 15px 2px #1669B7; 
+     box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 0px 0px 15px 2px #1669B7;
+ }
+
+ .custom-background{
+    background-color:rgba(173, 165, 165, 0.8);
+ }
 @media (min-width: 469px) {
     .logo{
         width: 10%;
@@ -50,11 +65,24 @@ body{
     .custom-title{
         margin-top: 4.5%;
     }
+
+  }
+  @media only screen and (max-width: 761px) {
+    .custom-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
   @media (min-width: 600px) {
     body {
         background-image: url("https://images.pexels.com/photos/5928260/pexels-photo-5928260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     }
+    .custom-background{
+        background-color:rgba(173, 165, 165, 0.5);
+     }
+    .sm-view{
+        display:inline-block;
+     }
   }
 @media (min-width: 764px) {
   #custom-height{
@@ -64,7 +92,7 @@ body{
         margin-top: 4%;
     }
   }
-  @media (min-width: 1200px) {
+  /* @media (min-width: 1200px) {
     .custom-title{
         margin-top: 12%;
     }

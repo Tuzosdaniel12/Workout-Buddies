@@ -1,34 +1,21 @@
-<div class="jumbotron jumbo-bg">
-    <div class="container bg-transparent">
-        <a href="/">
-          <div class="custom-flex">
-            <img class="logo" src="./assets/images/signup.png">
-            <div>
-              <h1 class="display-4 fw-bolder custom-title text-dark">{{name}} WorkOuts</h1>
-              <small class="lead fw-bold">Welcome Back Buddie!!</small>
-              <br>
-              <small>Your BMI:{{bmi}}</small>
-            </div>
-          </div>
-        </a>
-    </div>
-</div>
+ {{> jumbo/log-block }}
 
 <div class="container">
   <div class="row">
-    <div class="col-12 overflow-y" id="custom-height">
+    <div class="col-12" id="custom-height">
       <table class="table table-hover mt-3 mb-3 background">
         <thead>
           <tr>
             <th scope="col" style="width: 30%">Workout Name</th>
             <th scope="col" style="width: 20%">Author</th>
             <th scope="col" style="width: 10%">Category</th>
-            <th scope="col" style="width: 15%">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Actions
+            <th scope="col" style="width: 10%">
+                <div class="btn-group" style="width: 100%">
+                  <button type="button" style="width: 100%" class="px-2 btn btn-secondary dropdown-toggle btn-sm glyphicon glyphicon-th-list " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sm-view">Action</span>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="/">Home</a>
                     <a class="dropdown-item" href="/create">Create New Workout</a>
                     <a class="dropdown-item" href="/progress">Progress</a>
                     <a class="dropdown-item" href="/updatestats">Update Stats</a>
@@ -39,17 +26,17 @@
             </th>
           </tr>
         </thead>
-        <tbody>
-          {{#each workout}}
+        <tbody id="action-buttons">
+          {{#each workouts}}
             <tr>
               <td>{{title}}</td>
-              <td>{{name}}</td>
+              <td>{{author}}</td>
               <td>{{category}}</td>
-              <td>
-                <button type="button" class="btn btn-warning" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-success" data-publicBoolean="0"  data-id="{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-danger" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-primary" data-publicBoolean="0" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+              <td >
+                <button type="button" class="btn btn-warning btn-sm"   data-bool= {{bool}} data-action="view" data-id="{{id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-success btn-sm"  data-action="update" data-id="{{updateId}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm"  data-action="delete" data-id="{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-primary btn-sm"  data-action="like" data-id="{{id}}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
               </td>
             </tr>
           {{/each}}
@@ -63,10 +50,14 @@
       <h4>View WorkOut</h4>
     </div>
     <div class="card-body">
-      <h3>{{title}}</h3>
-      <p>{{category}}</p>
-      <p>{{name}}</p>
-      <p class="card-text">{{description}}</p>
+      {{#each workouts}}
+        {{#if bool}}
+          <h3 id="current-workout" data-id={{id}}>{{title}}</h3>
+          <p>{{category}}</p>
+          <p>{{author}}</p>
+          <p class="card-text">{{description}}</p>
+        {{/if}}
+      {{/each}}
     </div>
   </div>
 </div>

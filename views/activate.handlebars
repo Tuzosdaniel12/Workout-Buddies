@@ -1,27 +1,18 @@
-<div class="jumbotron jumbo-bg">
-    <div class="container bg-transparent">
-      <a href="/">
-          <div class="custom-flex">
-            <img class="logo" src="./assets/images/signup.png">
-            <div>
-              <h1 class="display-4 fw-bolder custom-title">WorkOut Buddies</h1>
-              <small class="lead fw-bold">Experience life style change with friends!!</small>
-            </div>
-          </div>
-        </div>
-      </a>
-  </div>
+ {{> jumbo/jumbo-block }} 
 
   <div class="container">
     <div class="row row justify-content-md-center custom-mx">
       <div class="col-md-6 background">
-        <h2>Activate Account</h2>
-        <form class="activate" >
+        <h2>{{action}} Account</h2>
+        <form class="{{action}}" >
           <div class="form-group">
+            {{#if bool}}
             <input type="code" class="form-control" id="code-input" name="code" placeholder="Activation Code">
+            {{else}}
+            <input type="email" class="form-control" id="email-input" name="email" placeholder="Send Email">
+            {{/if}}
           </div>
-          <p>{{message}}</p>
-          <button type="submit" value="submit" class="btn btn-default">Activate</button>
+          <button type="submit" value="submit" id="{{action}}" class="btn btn-default">{{action}}</button>
         </form>
         <br />
         <p>Or sign up <a href="/signup">HERE</a>.</p>
@@ -29,4 +20,5 @@
     </div>
   </div>
 
+  {{> modal/modal-block}}
   
