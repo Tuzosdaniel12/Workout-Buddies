@@ -11,15 +11,18 @@ $(document).ready(() => {
     const descriptionInput = $("#exerciseprogramTextarea1")
       .val()
       .trim();
-    if (event.target.getAttribute("data-id")) {
+    if (event.target.getAttribute("data-action") === "Update") {
+      console.log("updating");
+      console.log(event.target.getAttribute("data-action"));
       updateWO(
         event.target.getAttribute("data-id"),
         titleInput,
         categoryInput,
         descriptionInput
       );
-    } else {
+    } else if (event.target.getAttribute("data-action") === "Create") {
       console.log("creating");
+      console.log(event.target.getAttribute("data-action"));
       createWO(titleInput, categoryInput, descriptionInput);
     }
   });
