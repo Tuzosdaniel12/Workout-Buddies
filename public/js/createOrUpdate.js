@@ -11,7 +11,7 @@ $(document).ready(() => {
     const descriptionInput = $("#exerciseprogramTextarea1")
       .val()
       .trim();
-    if (event.target.getAttribute("data-id")) {
+    if (event.target.getAttribute("data-action") === "Update") {
       updateWO(
         event.target.getAttribute("data-id"),
         titleInput,
