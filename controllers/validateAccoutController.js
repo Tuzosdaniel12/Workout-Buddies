@@ -13,8 +13,8 @@ module.exports = async (req, res) => {
   }
   const { token } = tkn;
   const Jwt = new JWT();
-  const decodedToken = await Jwt.verify(token, secret).catch(err => {
-    console.error(err);
+  const decodedToken = await Jwt.verify(token, secret).catch(() => {
+    res.json({ message: "Expired code" });
   });
 
   if (decodedToken === undefined) {
