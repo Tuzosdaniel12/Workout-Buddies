@@ -29,7 +29,7 @@ class BMI {
       return error;
     });
 
-    console.log("\x1b[31m", "After setting options", data);
+    console.log("\x1b[31m", "After setting data", data);
 
     console.log("\x1b[31m", "bmi", data.bmi);
     return data.bmi;
