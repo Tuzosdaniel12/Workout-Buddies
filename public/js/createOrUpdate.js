@@ -1,5 +1,6 @@
 $(document).ready(() => {
   const CUBtn = $("#CUBtn");
+  const action = $("#CUBtn").data("action");
   CUBtn.on("click", event => {
     event.preventDefault();
     const titleInput = $("#nameOfTheWorkoutInput1")
@@ -12,20 +13,15 @@ $(document).ready(() => {
       .val()
       .trim();
     if (event.target.getAttribute("data-action") === "Update") {
-<<<<<<< HEAD
-      console.log("updating");
-      console.log(event.target.getAttribute("data-action"));
-=======
->>>>>>> e4c83ea22b560f8c0b8ab65834ee466d7312283c
       updateWO(
         event.target.getAttribute("data-id"),
         titleInput,
         categoryInput,
         descriptionInput
       );
-    } else if (event.target.getAttribute("data-action") === "Create") {
+    } else {
       console.log("creating");
-      console.log(event.target.getAttribute("data-action"));
+      console.log(action);
       createWO(titleInput, categoryInput, descriptionInput);
     }
   });
@@ -41,10 +37,14 @@ $(document).ready(() => {
   }
 
   function updateWO(id, titleInput, categoryInput, descriptionInput) {
-    $.put("/api/workouts/" + id, {
-      title: titleInput,
-      category: categoryInput,
-      description: descriptionInput
+    $.ajax({
+      url: "/api/workouts/" + id,
+      data: {
+        title: titleInput,
+        category: categoryInput,
+        description: descriptionInput
+      },
+      method: "PUT"
     }).then(() => {
       window.location.replace("/members");
     });

@@ -14,6 +14,19 @@ router.post("/api/bmi", (req, res) => {
   }).then(results => {
     res.json(results);
   });
+
+
+  // db.User.create({
+  //   name: name,
+  //   email: email,
+  //   password: password,
+  //   height: height,
+  //   weight: weight,
+  //   age: parseInt(age),
+  //   gender: gender
+  // }).catch(err => {
+  //   return res.status(401).json(err);
+  // });
 });
 
 module.exports = router;

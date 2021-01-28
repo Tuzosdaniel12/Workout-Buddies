@@ -38,7 +38,9 @@ router.get("/api/workouts/:category", (req, res) => {
 });
 
 //update personal workout
-router.put("api/workouts/:id", (req, res) => {
+router.put("/api/workouts/:id", (req, res) => {
+  console.log("PUTROUTE");
+  console.log(req.params.id);
   db.Workouts.update(
     {
       title: req.body.title,
