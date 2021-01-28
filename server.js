@@ -7,6 +7,7 @@ const exphbs = require("express-handlebars");
 const passport = require("./config/passport");
 //require options
 const port = require("./config/options.js")("port");
+const secret = require("./config/options")("secret");
 
 // Setting up port and requiring models for syncing
 const PORT = port || 3000;
@@ -24,9 +25,7 @@ app.set("view engine", "handlebars");
 
 // We need to use sessions to keep track of our user's login status
 app.use(flash());
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-);
+app.use(session({ secret: secret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 

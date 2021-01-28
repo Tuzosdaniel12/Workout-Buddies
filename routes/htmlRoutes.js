@@ -49,8 +49,16 @@ router.get("/update/:id", async (req, res) => {
   });
 });
 
+router.get("/reset-password", (req, res) => {
+  res.render("index");
+});
+
+router.get("/forgot-password", (req, res) => {
+  res.render("activate", { action: "email", bool: false });
+});
+
 router.get("/activate", (req, res) => {
-  res.render("activate");
+  res.render("activate", { action: "activate", bool: true });
 });
 
 router.get("/progress", async (req, res) => {

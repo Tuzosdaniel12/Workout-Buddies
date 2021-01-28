@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const options = {
   mysqldb: process.env.DB_PASS,
-  access: process.env.ACCESS_TOKEN_SECRET,
-  private: process.env.REFRESH_TOKEN_SECRET,
+  access: process.env.ACCESS_SECRET,
+  private: process.env.TOKEN_SECRET,
   mailPass: process.env.MAILGUN_PASS,
   mailgun: process.env.MAILGUN,
   port: process.env.PORT,

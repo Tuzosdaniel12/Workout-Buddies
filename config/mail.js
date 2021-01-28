@@ -9,10 +9,10 @@ class Mail {
   }
   html(key, action) {
     return `<h2>Welcome to Working Out Buddies</h2>
-          <h3>Activation Code:${key}</h3>
-          <a href="http://localhost:/3000/${action}">PRESS LINK TO ACTIVATE ACCOUNT</a>
+          <h3>${action} Code:${key}</h3>
+          <a href="http://localhost:/3000/${action}">PRESS LINK TO ${action} ACCOUNT</a>
 
-         <p>expires in five minutes</p>`;
+         <p>expires in ten minutes</p>`;
   }
   mailOptions(email, key, action) {
     return {
