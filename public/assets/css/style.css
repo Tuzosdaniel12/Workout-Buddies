@@ -102,7 +102,6 @@ body{
 
   .footer {
     color: #333333;
-    padding-top: 15%;
     padding: 50px;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -110,6 +109,7 @@ body{
 }
 
 .footer-mod{
+    padding-top: 15%;
       width: 100%;
       color: #333333;
       font-weight: bold;
