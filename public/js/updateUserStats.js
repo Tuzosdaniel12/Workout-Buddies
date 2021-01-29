@@ -30,7 +30,7 @@ const handleUserData = event => {
   console.log(userData);
 
   updateUpUser(userData);
-  // createBMI(userData);
+  createBMI(userData);
   $("#age-input").val("");
   $("#weight-input").val("");
 };
@@ -38,7 +38,12 @@ const handleUserData = event => {
 // Does a post to the signup route. If successful, we are redirected to the members page
 // Otherwise we log any errors
 function updateUpUser(userData) {
-  $.put("/api/update/userstats", userData)
+  console.log("updating");
+  $.ajax({
+    url: "/api/update/userstats",
+    data: userData,
+    method: "PUT"
+  })
     .then(response => {
       console.log(response);
       $("#thank-you-modal").show();
@@ -58,11 +63,14 @@ function updateUpUser(userData) {
     });
 }
 
-// createBMI(userData){
-//   $.post("/api/bmi"){
-
-//   }
-// }
+function createBMI(userData) {
+  console.log("creating");
+  $.post("/api/bmi", {
+    userData
+  }).then(() => {
+    window.location.replace("/progress");
+  });
+}
 
 updatestats.on("submit", handleUserData);
 updatestatsBtn.on("click", handleUserData);

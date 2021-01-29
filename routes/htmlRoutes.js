@@ -71,7 +71,11 @@ router.get("/resend-activation", (req, res) => {
 });
 
 router.get("/activate", (req, res) => {
-  res.render("activate", { action: "activate", bool: true });
+  res.render("activate", {
+    action: "activate",
+    bool: true,
+    target: "activate"
+  });
 });
 
 router.get("/progress", async (req, res) => {
