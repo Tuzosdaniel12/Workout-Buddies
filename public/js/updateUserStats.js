@@ -27,14 +27,19 @@ const handleUserData = event => {
     $("#response").text("Make sure All fields are filled in!!!");
     return;
   }
-  console.log(userData);
 
-  updateUpUser(userData);
   createBMI(userData);
   $("#age-input").val("");
   $("#weight-input").val("");
 };
-
+function createBMI(userData) {
+  console.log("creating");
+  $.post("/api/bmi", {
+    userData
+  }).then(() => {
+    updateUpUser(userData);
+  });
+}
 // Does a post to the signup route. If successful, we are redirected to the members page
 // Otherwise we log any errors
 function updateUpUser(userData) {
@@ -65,15 +70,6 @@ function updateUpUser(userData) {
         error: "error"
       };
     });
-}
-
-function createBMI(userData) {
-  console.log("creating");
-  $.post("/api/bmi", {
-    userData
-  }).then(() => {
-    window.location.replace("/progress");
-  });
 }
 
 updatestats.on("submit", handleUserData);

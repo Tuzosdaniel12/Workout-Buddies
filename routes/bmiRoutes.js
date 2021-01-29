@@ -9,7 +9,7 @@ router.get("/api/bmi", (req, res) => {
 
 router.put("/api/update/userstats", (req, res) => {
   console.log(req.body);
-  db.Users.update(
+  db.User.update(
     {
       height: req.body.height,
       weight: req.body.weight,
@@ -17,11 +17,11 @@ router.put("/api/update/userstats", (req, res) => {
     },
     {
       where: {
-        id: req.params.id
+        id: req.user.id
       }
     }
-  ).then(results => {
-    res.json(results);
+  ).then(() => {
+    res.json({ message: "Successfully updated stats" });
   });
 });
 
@@ -39,8 +39,8 @@ router.post("/api/bmi", (req, res) => {
       db.BMI.create({
         bmi: bmi,
         UserId: req.user.id
-      }).then(results => {
-        res.json(results);
+      }).then(() => {
+        res.json({ message: "Successfully updated stats" });
       });
     });
 });

@@ -6,8 +6,8 @@ router.get("/api/SavedWorkouts/:id", (req, res) => {
   db.SavedWorkouts.findAll({
     where: { userID: req.params.id },
     include: [{ model: workouts }]
-  }).then(results => {
-    res.json(results);
+  }).then(() => {
+    res.json({ success: "Change what you are viewing" });
   });
 });
 
@@ -38,8 +38,8 @@ router.put("/api/SavedWorkouts/:id", (req, res) => {
 });
 
 router.delete("/api/SavedWorkouts/:id", (req, res) => {
-  db.SavedWorkouts.destroy({ where: { id: req.params.id } }).then(results => {
-    res.json(results);
+  db.SavedWorkouts.destroy({ where: { id: req.params.id } }).then(() => {
+    res.json({ success: "Change what you are viewing" });
   });
 });
 
