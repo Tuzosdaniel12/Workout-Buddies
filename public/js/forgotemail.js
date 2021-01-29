@@ -24,8 +24,10 @@ const handleForgotPass = async e => {
   setTimeout(() => {
     if (email.action === "reset-password") {
       window.location.replace("/reset-password");
-    } else {
+    } else if (email.action === "resend-activation") {
       window.location.replace("/activate");
+    } else {
+      window.location.replace("/");
     }
   }, 4000);
 };

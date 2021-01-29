@@ -7,7 +7,7 @@
         <form class="{{action}}" >
           <div class="form-group">
             {{#if bool}}
-            <input type="code" class="form-control" id="code-input" name="code" placeholder="Activation Code">
+            <input type="code" class="form-control" id="code-input" data-target="{{target}}" name="code" placeholder="Activation Code">
             {{else}}
             <input type="email" class="form-control" id="email-input" data-target="{{target}}" name="email" placeholder="Send Email">
             {{/if}}
@@ -16,6 +16,9 @@
         </form>
         <br />
         <p>Or sign up <a href="/signup">HERE</a>.</p>
+        {{#if bool}}
+        <a class="mb-3" href="/resend-activation"><small>Resend Activate code </small></a>
+        {{/if}}
       </div>
     </div>
   </div>
