@@ -24,7 +24,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 // otherwise send back an error
 router.post("/api/signup", async (req, res) => {
   const { name, email, password, height, weight, age, gender } = req.body;
-  console.log(req.body);
+
   const dbUser = await db.User.findAll({
     where: {
       email: email
@@ -32,15 +32,17 @@ router.post("/api/signup", async (req, res) => {
   });
 
   if (dbUser.length >= 1) {
-    res.status(400).json({ error: "User with email already exists." });
-    res.redirect("/");
+    return res.json({ message: "User with email already exists." });
   }
   const bmiCal = new BMI();
 
-  let bmi = await bmiCal.getRequest(age, weight * 0.453592, height * 2.54);
+  let bmi = await bmiCal
+    .getRequest(age, weight * 0.453592, height * 2.54)
+    .catch(() => {
+      return res.json({ message: "Something Went wrong come back later" });
+    });
   bmi = Math.floor(bmi);
 
-  console.log("HIT", bmi);
   await db.User.create({
     name: name,
     email: email,
@@ -49,14 +51,16 @@ router.post("/api/signup", async (req, res) => {
     weight: weight,
     age: parseInt(age),
     gender: gender
-  }).catch(err => {
-    return res.status(401).json(err);
+  }).catch(() => {
+    return res.json({ message: "something went wrong" });
   });
 
   const userId = await db.User.findAll({
     where: {
       email: email
     }
+  }).catch(() => {
+    return res.json({ message: "something went wrong" });
   });
 
   await db.BMI.create({
@@ -73,20 +77,22 @@ router.post("/api/signup", async (req, res) => {
   await db.Tokens.create({
     token: await Tokens.sign(email),
     key: key
-  }).catch(err => {
-    console.error(err);
+  }).catch(() => {
+    return res.json({
+      message: "error"
+    });
   });
 
   const mail = new Mail();
 
-  if (mail.sendMail(email, key, "activate")) {
+  if (await mail.sendMail(email, key, "activate")) {
     return res.json({
       message:
         "We created your account an Email has been sent, kindly activate your account"
     });
   }
   return res.json({
-    error: "error"
+    message: "error"
   });
 });
 

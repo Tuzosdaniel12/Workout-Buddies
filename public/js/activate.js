@@ -2,31 +2,29 @@ const activateForm = $("form.activate");
 
 const handleActivation = async e => {
   e.preventDefault();
-  console.log("hit");
+
   const activation = {
     key: $("#code-input")
       .val()
       .trim()
   };
 
-  const results = await activate(activation).catch(() => {
+  try {
+    const results = await activate(activation);
+
+    $("#thank-you-modal").show();
+    $("#notification").text("Activated");
+    $("#response").text(results.message);
+
+    setTimeout(() => {
+      window.location.replace("/");
+    }, 4000);
+  } catch (err) {
+    console.log(err);
     $("#thank-you-modal").show();
     $("#notification").text("Errors");
-    console.log(err, "error");
-  });
-  console.log(results);
-  $("#thank-you-modal").show();
-  $("#notification").text("Activated");
-
-  if (results.error !== undefined || results.error !== null) {
-    $("#response").text(results.error);
-  } else {
-    $("#response").text(results.success);
+    $("#response").text("");
   }
-
-  setTimeout(() => {
-    window.location.replace("/");
-  }, 4000);
 };
 
 const activate = activation => {

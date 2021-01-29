@@ -1,5 +1,6 @@
 $(document).ready(() => {
   const CUBtn = $("#CUBtn");
+  const action = $("#CUBtn").data("action");
   CUBtn.on("click", event => {
     event.preventDefault();
     const titleInput = $("#nameOfTheWorkoutInput1")
@@ -20,6 +21,7 @@ $(document).ready(() => {
       );
     } else {
       console.log("creating");
+      console.log(action);
       createWO(titleInput, categoryInput, descriptionInput);
     }
   });
@@ -35,10 +37,14 @@ $(document).ready(() => {
   }
 
   function updateWO(id, titleInput, categoryInput, descriptionInput) {
-    $.put("/api/workouts/" + id, {
-      title: titleInput,
-      category: categoryInput,
-      description: descriptionInput
+    $.ajax({
+      url: "/api/workouts/" + id,
+      data: {
+        title: titleInput,
+        category: categoryInput,
+        description: descriptionInput
+      },
+      method: "PUT"
     }).then(() => {
       window.location.replace("/members");
     });

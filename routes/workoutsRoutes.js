@@ -4,6 +4,7 @@ const router = require("express").Router();
 //create workout userID:req.user.id
 router.post("/api/workouts", (req, res) => {
   console.log("req.user.id", req.user.id);
+  console.log("createROUTE");
   db.Workouts.create({
     title: req.body.title,
     category: req.body.category,
@@ -37,7 +38,9 @@ router.get("/api/workouts/:category", (req, res) => {
 });
 
 //update personal workout
-router.put("api/workouts/:id", (req, res) => {
+router.put("/api/workouts/:id", (req, res) => {
+  console.log("PUTROUTE");
+  console.log(req.params.id);
   db.Workouts.update(
     {
       title: req.body.title,

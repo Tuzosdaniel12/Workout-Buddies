@@ -3,15 +3,12 @@ const emailBtn = $("#email");
 
 const handleForgotPass = async e => {
   e.preventDefault();
-  console.log(
-    $("#email-input")
-      .val()
-      .trim()
-  );
+
   const email = {
     email: $("#email-input")
       .val()
-      .trim()
+      .trim(),
+    action: $("#email-input").data("target")
   };
 
   const result = await sendEmail(email).catch(err => {
@@ -19,29 +16,28 @@ const handleForgotPass = async e => {
     $("#notification").text("Errors");
     console.log(err, "error");
   });
-  if (result.error) {
-    $("#thank-you-modal").show();
-    $("#notification").text("Invalid Account");
-    $("#response").text(result.error);
 
-    setTimeout(() => {
-      window.location.replace("/");
-    }, 4000);
-  }
   $("#thank-you-modal").show();
-  $("#notification").text("Email Notification");
+  $("#notification").text("Reset Email");
   $("#response").text(result.message);
 
   setTimeout(() => {
-    window.location.replace("/reset-password");
+    if (email.action === "reset-password") {
+      window.location.replace("/reset-password");
+    } else if (email.action === "resend-activation") {
+      window.location.replace("/activate");
+    } else {
+      window.location.replace("/");
+    }
   }, 4000);
 };
 
 const sendEmail = email => {
+  console.log(email);
   return $.ajax({
-    url: "/api/forgot-password",
+    url: "/api/send-email",
     data: email,
-    method: "GET"
+    method: "POST"
   });
 };
 emailForm.on("submit", handleForgotPass);

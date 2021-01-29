@@ -21,6 +21,11 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+router.get("/reset-password", (req, res) => {
+  // If the user already has an account send them to the members page
+  res.render("resetpass");
+});
+
 router.get("/create", (req, res) => {
   if (!req.user) {
     res.redirect("/");
@@ -49,16 +54,28 @@ router.get("/update/:id", async (req, res) => {
   });
 });
 
-router.get("/reset-password", (req, res) => {
-  res.render("index");
+router.get("/forgot-password", (req, res) => {
+  res.render("activate", {
+    action: "email",
+    bool: false,
+    target: "reset-password"
+  });
 });
 
-router.get("/forgot-password", (req, res) => {
-  res.render("activate", { action: "email", bool: false });
+router.get("/resend-activation", (req, res) => {
+  res.render("activate", {
+    action: "email",
+    bool: false,
+    target: "resend-activation"
+  });
 });
 
 router.get("/activate", (req, res) => {
-  res.render("activate", { action: "activate", bool: true });
+  res.render("activate", {
+    action: "activate",
+    bool: true,
+    target: "activate"
+  });
 });
 
 router.get("/progress", async (req, res) => {
@@ -146,40 +163,44 @@ router.get("/members", isAuthenticated, async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
-  const results = await db.SavedWorkouts.findAll({
-    where: { UserId: req.user.id },
-    order: [["createdAt", "DESC"]],
-    include: [
-      { model: db.Workouts, include: [{ model: db.User }] },
-      { model: db.User }
-    ]
-  });
+  try {
+    const results = await db.SavedWorkouts.findAll({
+      where: { UserId: req.user.id },
+      order: [["createdAt", "DESC"]],
+      include: [
+        { model: db.Workouts, include: [{ model: db.User }] },
+        { model: db.User }
+      ]
+    });
 
-  const bmiRes = await db.BMI.findAll({
-    where: { UserId: req.user.id },
-    order: [["createdAt", "DESC"]]
-  });
-  const bmi = bmiRes[0].dataValues.bmi;
+    const bmiRes = await db.BMI.findAll({
+      where: { UserId: req.user.id },
+      order: [["createdAt", "DESC"]]
+    });
+    const bmi = bmiRes[0].dataValues.bmi;
 
-  const workouts = results.map(workout => {
-    return {
-      id: workout.dataValues.id,
-      bool: workout.dataValues.publicBoolean,
-      title: workout.dataValues.Workout.title,
-      category: workout.dataValues.Workout.category,
-      name: workout.dataValues.User.name,
-      description: workout.dataValues.Workout.description,
-      author: workout.dataValues.Workout.User.name,
-      updateId: workout.dataValues.Workout.id
-    };
-  });
+    const workouts = results.map(workout => {
+      return {
+        id: workout.dataValues.id,
+        bool: workout.dataValues.publicBoolean,
+        title: workout.dataValues.Workout.title,
+        category: workout.dataValues.Workout.category,
+        name: workout.dataValues.User.name,
+        description: workout.dataValues.Workout.description,
+        author: workout.dataValues.Workout.User.name,
+        updateId: workout.dataValues.Workout.id
+      };
+    });
 
-  res.render("members", {
-    workouts: workouts,
-    name: req.user.name,
-    bmi: bmi,
-    message: "Welcome Back Buddie!!"
-  });
+    res.render("members", {
+      workouts: workouts,
+      name: req.user.name,
+      bmi: bmi,
+      message: "Welcome Back Buddie!!"
+    });
+  } catch (err) {
+    return res.json({ messages: "Something wrong happen" });
+  }
 });
 
 module.exports = router;

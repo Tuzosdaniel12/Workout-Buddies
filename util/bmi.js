@@ -15,10 +15,14 @@ class BMI {
   }
   async getRequest(age, weight, height) {
     const options = await this.getOptions(age, weight, height);
+
+    console.log("\x1b[31m", "After setting options", options);
+
     const { data } = await this.axios.request(options).catch(error => {
       console.error(error);
+      return error;
     });
-    console.log(data.bmi);
+
     return data.bmi;
   }
 }

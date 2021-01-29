@@ -1,24 +1,23 @@
-// const domain = require("./options.js")("domain");
-// const mailKey = require("./options.js")("mailKey");
-
+const util = require("util");
 class Mail {
   constructor() {
     this.nodemailer = require("nodemailer");
-    this.mailgun = require("./options.js")("mailgun");
     this.mailPass = require("./options.js")("mailPass");
+    this.siteUrl = require("./options.js")("siteUrl");
   }
   html(key, action) {
     return `<h2>Welcome to Working Out Buddies</h2>
-          <h3>${action} Code:${key}</h3>
-          <a href="http://localhost:/3000/${action}">PRESS LINK TO ${action} ACCOUNT</a>
+    <br>
+          <h3>${action} Code:   ${key}</h3><br>
+          <a href="${this.siteUrl}${action}">Press link to ${action}</a>
 
-         <p>expires in ten minutes</p>`;
+         <p>Expires in ten minutes</p>`;
   }
   mailOptions(email, key, action) {
     return {
       from: "noreply@workingoutbuddies.com",
       to: email,
-      subject: "Account Activation Link",
+      subject: "Account " + action + " Link",
       text: `Welcome to Workout Buddies`,
       html: this.html(key, action)
     };
@@ -29,7 +28,7 @@ class Mail {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-        user: this.mailgun, // generated ethereal user
+        user: "postmaster@workout-buddies.site", // generated ethereal user
         pass: this.mailPass // generated ethereal password
       },
       tls: {
@@ -41,16 +40,19 @@ class Mail {
     const transporter = await this.createTransporter();
     const mailOptions = await this.mailOptions(email, key, action);
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-        return false;
-      }
+    transporter.sendMail = util.promisify(transporter.sendMail);
+    try {
+      const info = await transporter.sendMail(mailOptions);
+
       console.log("Message sent: %s", info.messageId);
       console.log("Preview URL: %s", this.nodemailer.getTestMessageUrl(info));
 
       return true;
-    });
+    } catch (err) {
+      console.log(err);
+
+      return false;
+    }
   }
 }
 
