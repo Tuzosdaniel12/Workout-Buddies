@@ -9,7 +9,7 @@ const port = require("./config/options.js")("port");
 const secret = require("./config/options")("secret");
 
 // Setting up port and requiring models for syncing
-const PORT = port || 3000;
+const PORT = port;
 const db = require("./models");
 
 // Creating express app and configuring middleware needed for authentication

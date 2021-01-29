@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   const { token } = tkn;
   const Jwt = new JWT();
   const decodedToken = await Jwt.verify(token, secret).catch(() => {
-    res.json({ message: "Expired code" });
+    return res.json({ message: "Expired code" });
   });
 
   if (decodedToken === undefined) {
@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
     console.log("here inside ");
     res
       .status(401)
-      .json({ error: "failed" })
+      .json({ message: "failed" })
       .res.redirect("/");
   });
   console.log("here");
