@@ -12,7 +12,7 @@ const handleActivation = async e => {
   const results = await activate(activation).catch(() => {
     $("#thank-you-modal").show();
     $("#notification").text("Errors");
-    console.log(err, "error");
+    $("#response").text(results.message);
   });
 
   $("#thank-you-modal").show();
