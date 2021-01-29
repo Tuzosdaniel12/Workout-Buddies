@@ -30,6 +30,7 @@ const handleUserData = event => {
   console.log(userData);
 
   updateUpUser(userData);
+  // createBMI(userData);
   $("#age-input").val("");
   $("#weight-input").val("");
 };
@@ -56,6 +57,12 @@ function updateUpUser(userData) {
       };
     });
 }
+
+// createBMI(userData){
+//   $.post("/api/bmi"){
+
+//   }
+// }
 
 updatestats.on("submit", handleUserData);
 updatestatsBtn.on("click", handleUserData);
