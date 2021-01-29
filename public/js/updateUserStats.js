@@ -41,7 +41,11 @@ function updateUpUser(userData) {
   console.log("updating");
   $.ajax({
     url: "/api/update/userstats",
-    data: userData,
+    data: {
+      age: userData.age,
+      height: userData.height,
+      weight: userData.weight
+    },
     method: "PUT"
   })
     .then(response => {

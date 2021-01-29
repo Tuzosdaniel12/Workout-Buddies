@@ -8,6 +8,7 @@ router.get("/api/bmi", (req, res) => {
 });
 
 router.put("/api/update/userstats", (req, res) => {
+  console.log(req.body);
   db.Users.update(
     {
       height: req.body.height,
@@ -16,7 +17,7 @@ router.put("/api/update/userstats", (req, res) => {
     },
     {
       where: {
-        id: req.user.id
+        id: req.params.id
       }
     }
   ).then(results => {
@@ -26,19 +27,22 @@ router.put("/api/update/userstats", (req, res) => {
 
 router.post("/api/bmi", (req, res) => {
   const bmiCal = new BMI();
-
-  let bmi = bmiCal.getRequest(
-    req.body.age,
-    req.body.weight * 0.453592,
-    req.body.height * 2.54
-  );
-  bmi = Math.floor(bmi);
-  db.BMI.create({
-    bmi: bmi,
-    UserId: req.user.id
-  }).then(results => {
-    res.json(results);
-  });
+  console.log(req.body);
+  bmiCal
+    .getRequest(
+      req.body.userData.age,
+      req.body.userData.weight * 0.453592,
+      req.body.userData.height * 2.54
+    )
+    .then(bmi => {
+      bmi = Math.floor(bmi);
+      db.BMI.create({
+        bmi: bmi,
+        UserId: req.user.id
+      }).then(results => {
+        res.json(results);
+      });
+    });
 });
 
 module.exports = router;
