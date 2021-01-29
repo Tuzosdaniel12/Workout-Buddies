@@ -1,3 +1,4 @@
+const util = require("util");
 class Mail {
   constructor() {
     this.nodemailer = require("nodemailer");
@@ -39,16 +40,19 @@ class Mail {
     const transporter = await this.createTransporter();
     const mailOptions = await this.mailOptions(email, key, action);
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-        return false;
-      }
+    transporter.sendMail = util.promisify(transporter.sendMail);
+    try {
+      const info = await transporter.sendMail(mailOptions);
+
       console.log("Message sent: %s", info.messageId);
       console.log("Preview URL: %s", this.nodemailer.getTestMessageUrl(info));
 
       return true;
-    });
+    } catch (err) {
+      console.log(err);
+
+      return false;
+    }
   }
 }
 

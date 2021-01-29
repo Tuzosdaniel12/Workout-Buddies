@@ -67,7 +67,10 @@ $(document).ready(() => {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function signUpUser(userData) {
-    $.post("/api/signup", userData)
+    $.ajax("/api/signup", {
+      type: "POST",
+      data: userData
+    })
       .then(response => {
         $("#thank-you-modal").show();
         $("#notification").text("Email Notification");
