@@ -27,12 +27,6 @@ app.use(session({ secret: secret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//routes
-// const authRoutes = require("./routes/authRoutes");
-// const htmlRoutes = require("./routes/htmlRoutes");
-// const activation = require("./routes/activateAccountRoute");
-console.log(process.env.NODE_ENV);
-
 app.use(require("./routes"));
 
 // Syncing our database and logging a message to the user upon success
