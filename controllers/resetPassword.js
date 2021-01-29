@@ -1,10 +1,11 @@
 const { User, Tokens } = require("../models");
 const JWT = require("../config/jwt");
+const bcrypt = require("bcryptjs");
 const secret = require("../config/options")("private");
 
 module.exports = async (req, res) => {
   const tkn = await Tokens.findOne({
-    where: { key: req.body.key }
+    where: { key: req.body.code }
   }).catch(() => {
     return res.json({ message: "No account created yet" });
   });
@@ -22,22 +23,26 @@ module.exports = async (req, res) => {
   }
   const { email } = decodedToken;
 
+  const password = await bcrypt.hashSync(
+    req.body.password,
+
+    bcrypt.genSaltSync(10),
+
+    null
+  );
+
   await User.update(
     {
-      emailBoolean: 1
+      password: password
     },
     { where: { email: email } }
   ).catch(() => {
-    console.log("here inside ");
-    res
-      .status(401)
-      .json({ message: "failed" })
-      .res.redirect("/");
-  });
-
-  await Tokens.destroy({ where: { key: req.body.key } }).catch(() => {
     return res.json({ message: "failed" });
   });
 
-  return res.json({ message: "We activated your account" });
+  await Tokens.destroy({ where: { key: req.body.code } }).catch(() => {
+    return res.json({ message: "failed" });
+  });
+
+  return res.json({ message: "We updated your account with your request" });
 };

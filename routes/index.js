@@ -5,5 +5,6 @@ module.exports = [
   require("./workoutsRoutes.js"),
   require("./activateAccountRoute.js"),
   require("./sendEmailRoute"),
+  require("./resetPass"),
   require("./htmlRoutes.js")
 ];
