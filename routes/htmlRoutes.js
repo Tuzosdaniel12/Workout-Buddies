@@ -82,6 +82,9 @@ router.get("/progress", async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
+  const dbUser = await db.User.findOne({
+    where: { email: req.user.email }
+  });
 
   const bmiRes = await db.BMI.findAll({
     where: { UserId: req.user.id },
@@ -100,27 +103,32 @@ router.get("/progress", async (req, res) => {
   });
 
   const bmi = bmiRes[0].dataValues.bmi;
-  const ft = Math.floor(req.user.height / 12);
-  const inches = req.user.height % 12;
+  const ft = Math.floor(parseInt(dbUser.dataValues.height / 12));
+  const inches = parseInt(dbUser.dataValues.height % 12);
+
   res.render("progress", {
     renderData: renderData,
     name: req.user.name,
     bmi: bmi,
-    weight: req.user.weight,
-    age: req.user.age,
+    weight: dbUser.dataValues.weight,
+    age: dbUser.dataValues.age,
     height: `${ft} ' ${inches}`,
-    message: "All Workouts!!"
+    message: "All Workouts!!",
+    color: await backgroundColor(parseInt(bmi))
   });
 });
 
-router.get("/updatestats", (req, res) => {
+router.get("/updatestats", async (req, res) => {
   if (!req.user) {
     res.redirect("/");
   }
+  const dbUser = await db.User.findOne({
+    where: { email: req.user.email }
+  });
   res.render("updatestats", {
     action: "update stats",
-    weight: req.user.weight,
-    age: req.user.age
+    weight: dbUser.dataValues.weight,
+    age: dbUser.dataValues.age
   });
 });
 
@@ -154,7 +162,8 @@ router.get("/allworkouts", async (req, res) => {
     workouts: dataRender,
     name: req.user.name,
     bmi: bmi,
-    message: "All Workouts!!"
+    message: "All Workouts!!",
+    color: await backgroundColor(parseInt(bmi))
   });
 });
 // Here we've add our isAuthenticated middleware to this route.
@@ -196,11 +205,23 @@ router.get("/members", isAuthenticated, async (req, res) => {
       workouts: workouts,
       name: req.user.name,
       bmi: bmi,
-      message: "Welcome Back Buddie!!"
+      message: "Welcome Back Buddie!!",
+      color: await backgroundColor(parseInt(bmi))
     });
   } catch (err) {
     return res.json({ messages: "Something wrong happen" });
   }
 });
+
+const backgroundColor = bmi => {
+  if (bmi <= 18) {
+    return "DeepSkyBlue";
+  } else if (bmi >= 19 && bmi <= 25) {
+    return "LightGreen";
+  } else if (bmi >= 26 && bmi <= 30) {
+    return "orange";
+  }
+  return "red";
+};
 
 module.exports = router;

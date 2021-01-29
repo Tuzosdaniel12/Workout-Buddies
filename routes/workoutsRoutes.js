@@ -24,17 +24,15 @@ router.post("/api/workouts", (req, res) => {
 });
 //read for all workouts
 router.get("/api/workouts", (req, res) => {
-  db.Workouts.findAll().then(results => {
-    res.json(results);
+  db.Workouts.findAll().then(() => {
+    res.json({ success: "We added a new workout Buddie!!" });
   });
 });
 //read workouts based on category
 router.get("/api/workouts/:category", (req, res) => {
-  db.Workouts.findAll({ where: { category: req.params.category } }).then(
-    results => {
-      res.json(results);
-    }
-  );
+  db.Workouts.findAll({ where: { category: req.params.category } }).then(() => {
+    res.json({ success: "We added a new workout Buddie!!" });
+  });
 });
 
 //update personal workout
@@ -48,8 +46,8 @@ router.put("/api/workouts/:id", (req, res) => {
       category: req.body.category
     },
     { where: { id: req.params.id } }
-  ).then(results => {
-    res.json(results);
+  ).then(() => {
+    res.json({ success: "We added a new workout Buddie!!" });
   });
 });
 
@@ -61,8 +59,7 @@ router.put("/api/workouts/view/:id", (req, res) => {
       publicBoolean: req.body.bool
     },
     { where: { id: req.params.id } }
-  ).then(results => {
-    console.log(results);
+  ).then(() => {
     if (req.body.current) {
       db.Workouts.update(
         {
