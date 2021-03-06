@@ -1,6 +1,6 @@
 # Workout Buddies
 
-# Description
+# About
 
 Workout buddies is a simple full-stack web application that allows fitness enthusiast to connect with each other for a workout. 
 It enables users to create a new workout program or exercise from the comfort of their home, share stats, view other workout programs 
